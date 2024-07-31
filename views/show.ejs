@@ -1,0 +1,120 @@
+<%- include('./partials/header') %>
+
+<div>
+
+    <main class="my-8">
+
+        <div class="container mx-auto px-6">
+            
+            <div class="w-full flex flex-col justify-center md:flex md:flex-row md:justify-start">
+
+                <div>
+                    <img class="h-full w-full rounded-md object-cover max-w-lg" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="<%= product.name %>">
+                </div>
+
+                <div class="w-full max-w-lg mt-5 md:ml-8 md:mt-0 md:w-1/2">
+
+                    <div class="flex justify-between">
+                        
+                        <h3 class="text-gray-700 text-lg flex flex-col"><%= product.name %><% if(product.brand){ %> <span class="text-gray-500 text-sm">by <%= product.brand %><% } %></span></h3>
+
+                        <div class="md:hidden">
+                            
+                            <% if(product.stock >= 1) { %>
+    
+                                <div class="flex items-center">
+    
+                                    <a href="/addtocart/<%= product._id %>"><button class="px-8 py-2 bg-pink-600 text-white text-sm font-medium rounded hover:bg-pink-500 focus:outline-none focus:bg-pink-500">Add to Cart</button></a>
+    
+                                </div>
+    
+                    
+                            <% } else { %>
+    
+                                <a><button class="px-8 py-2 bg-pink-600 text-white text-sm font-medium rounded hover:bg-pink-500 focus:outline-none focus:bg-pink-500 cursor-not-allowed">Sold Out</button></a>
+                                    
+                            <% } %>
+    
+                        </div>
+                        
+                    </div>
+
+                    <span class="text-gray-500 mt-3 flex items-center">
+                    
+                        <% if(product.discount){ %> <p class="line-through text-zinc-500">Rs.<%= product.price %>&nbsp;</p><% } else{ %><% } %> <p class="text-pink-700 font-semibold"> Rs.<%= product.price - product.discount %></p>
+                        
+                    </span>
+
+                    <hr class="my-3">
+
+                    <div class="hidden md:flex">
+                    
+                        <% if(product.stock >= 1) { %>
+
+                            <div class="flex items-center mt-6">
+
+                                <a href="/addtocart/<%= product._id %>"><button class="px-8 py-2 bg-pink-600 text-white text-sm font-medium rounded hover:bg-pink-500 focus:outline-none focus:bg-pink-500">Add to Cart</button></a>
+
+                            </div>
+
+                
+                        <% } else { %>
+
+                            <a><button class="px-8 py-2 bg-pink-600 text-white text-sm font-medium rounded hover:bg-pink-500 focus:outline-none focus:bg-pink-500 cursor-not-allowed">Sold Out</button></a>
+                                
+                        <% } %>
+
+                    </div>
+
+                    <div class="mt-10 border border-zinc-400 px-4 py-4 overflow-hidden hidden lg:flex flex-col">
+                            <h1 class="text-2xl mb-4">Description:</h1>
+                            <h1 class="max-w-md"><%- product.description.replace(/\r?\n/g, "<br>") %></h1>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="mt-10 border border-zinc-400 px-4 py-4 overflow-hidden lg:hidden">
+                <h1 class="text-2xl mb-4">Description:</h1>
+                <h1 class="max-w-md"><%- product.description.replace(/\r?\n/g, "<br>") %></h1>
+            </div>
+
+            <div class="mt-16">
+
+                <h3 class="text-gray-600 text-2xl font-medium">More Products</h3>
+
+                <div class="flex mt-6 whitespace-nowrap overflow-x-auto">
+
+                    <% randomProducts.forEach(function(product) { %>
+
+                        <a href="/<%= product._id %>" class="inline-block">
+                            
+                            <div class="w-40 mr-5 rounded-md shadow-md overflow-hidden cursor-pointer">
+        
+                                <img class="w-full bg-cover" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" />
+        
+                                <div class="px-5 py-3">
+        
+                                    <h3 class="text-gray-700 uppercase overflow-hidden"><%= product.name %></h3>
+                                    <span class="text-gray-500 mt-2">Rs. <%= product.price - product.discount %></span>
+        
+                                </div>
+        
+                            </div>
+
+                        </a>
+
+                    <% }) %>
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+    
+</div>
+
+<%- include('./partials/footer') %>

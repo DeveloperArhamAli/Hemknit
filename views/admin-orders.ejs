@@ -1,0 +1,89 @@
+<%- include ('./partials/header') %>
+
+<% if(success.length>0){ %>
+    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-pink-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= success %>
+        </span>
+    </div>
+<% } %>
+
+<% if(error.length>0){ %>
+    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-red-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= error %>
+        </span>
+    </div>
+<% } %>
+
+<div class="w-full flex justify-between px-10 py-10">
+
+    <div class="w-[15%] flex h-screen flex-col ">
+        <a href="/" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Shop</a>
+        <a href="/owners/products" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Products</a>
+        <a href="/owners/orders" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Orders</a>
+        <a href="/owners/admin" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Create Products</a>
+        <a class="bg-red-500 text-white px-3 py-3 font-semibold rounded-lg" href="/users/logout">Logout</a>
+    </div>
+
+    <div class="w-[75%] px-2 py-2">
+
+        <div class="w-full flex justify-center mb-4"><h1 class="text-3xl font-semibold">Orders</h1></div>
+        <% if (orders.length > 0) { %>
+            <div class="bg-white px-10 py-10 w-full">
+                <% orders.forEach(order => { %>
+
+                    <div class="flex items-center justify-between mb-3 mt-3">
+        
+                        <div class="w-28">
+        
+                            <h1><%= order.user.charAt(0).toUpperCase() + order.user.slice(1) %></h1>
+        
+                        </div>
+
+                        <div>
+
+                            <h1>Rs. <%= order.order.totalPrice %></h1>
+
+                        </div>
+        
+                        <div class="min-w-20">
+        
+                            <h1><%= order.order.date.toLocaleDateString() %></h1>
+        
+                        </div>
+        
+                        <div>
+
+                            <form action="/owners/orders/<%= order.userId %>/<%= order.order._id %>/status" method="post" class="flex flex-col">
+                                <select name="status" class="px-2 py-1">
+                                    <option value="pending" class="text-yellow-500 font-semibold" <%= order.order.status === 'pending' ? 'selected' : '' %>>Pending</option>
+                                    <option value="Shipped" class="text-blue-500 font-semibold" <%= order.order.status === 'Shipped' ? 'selected' : '' %>>Shipped</option>
+                                    <option value="Delivered" class="text-green-500 font-semibold" <%= order.order.status === 'Delivered' ? 'selected' : '' %>>Delivered</option>
+                                    <option value="Cancelled" class="text-red-500 font-semibold" <%= order.order.status === 'Cancelled' ? 'selected' : '' %>>Cancelled</option>
+                                </select>
+                                <button type="submit" class="border px-1 py-1 rounded-md mt-1">Update Status</button>
+                            </form>
+                    
+                        </div>
+        
+                        <div>
+                            <a href="/owners/orders/<%= order.order._id %>"><button class="border px-2 py-2 rounded-lg font-semibold">View Details</button></a>
+
+                        </div>
+
+                    </div>
+                    <hr>
+                    <% }) %>
+            </div>
+        <% } else { %>
+            <div class="w-full h-full flex items-center justify-center">
+                <p>No orders found.</p>
+            </div>
+        <% } %>
+
+    </div>
+
+</div>
+
+<%- include ('./partials/footer') %>

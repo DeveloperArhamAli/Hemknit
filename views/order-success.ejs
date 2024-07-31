@@ -1,0 +1,28 @@
+<%- include ("./partials/header") %>
+
+<% if(success.length>0){ %>
+    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-pink-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= success %>
+        </span>
+    </div>
+<% } %>
+
+<% if(error.length>0){ %>
+    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-red-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= error %>
+        </span>
+    </div>
+<% } %>
+
+    <div class="h-[50vh] w-screen flex flex-col items-center justify-center">
+        <h1 class="text-2xl font-semibold">Order Success</h1>
+        <p class="text-lg">Your order has been placed successfully!</p>
+        <div class="flex gap-2">
+            <a href="/" class="w-fit px-3 py-2 flex items-center justify-center bg-pink-500 text-white gap-2 mt-1   rounded">Continue Shopping</a>
+            <a href="/my-orders" class="w-fit px-3 py-2 flex items-center justify-center bg-pink-500 text-white gap-2 mt-1 rounded">View All Orders</a>
+        </div>
+    </div>
+
+<%- include ("./partials/footer") %>

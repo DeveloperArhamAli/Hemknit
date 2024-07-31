@@ -1,0 +1,78 @@
+<%- include('./partials/header') %>
+
+<% if(success.length > 0) { %>
+    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-pink-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= success %>
+        </span>
+    </div>
+<% } %>
+
+<% if(error.length > 0) { %>
+    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-red-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= error %>
+        </span>
+    </div>
+<% } %>
+
+<section class="py-10">
+
+    <div class="p-6 whitespace-nowrap overflow-x-auto overflow-y-hidden flex wrapper">
+
+        <% products.forEach(function(product) { %>
+
+            <div class="bg-white shadow-lg min-w-72 mr-9">
+    
+            <a href="/<%= product._id %>">
+    
+                <div class="relative flex items-end overflow-hidden">
+
+                    <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="Product Image" />
+
+                </div>
+
+                <div class="mt-1 p-2 flex flex-col items-center">
+
+                    <h2 class="text-slate-700 text-xl"><%= product.name %></h2>
+                    <% if (product.brand) { %>
+                        <p class="mt-1 text-sm text-slate-400 text-center">
+                            by <%= product.brand %>
+                        </p>
+                    <% } %>
+
+                    <div class="mt-3 flex items-center justify-between px-5 w-full">
+
+                        <p class="text-lg font-bold text-pink-400">
+                            Rs.<%= product.price - product.discount %>
+                        </p>
+
+                        <% if(product.stock >= 1) { %>
+                        <a class="flex items-center space-x-1.5 rounded-lg bg-pink-500 px-4 py-1.5 text-white duration-100 hover:bg-pink-600" href="/addtocart/<%= product._id %>">
+                            <i class="ri-shopping-cart-line"></i>
+                            <button class="text-sm">Add to cart</button>
+                        </a>
+
+                        <% } else { %>
+                                <a class="flex items-center space-x-1.5 rounded-lg bg-pink-500 px-4 py-1.5 text-white duration-100 hover:bg-pink-600 cursor-not-allowed">
+                                <i class="ri-shopping-cart-line"></i>
+                                <button class="text-sm">Sold Out</button>
+                            </a>
+                        <% } %>
+
+                    </div>
+
+                </div>
+    
+            </a>
+    
+            </div>
+
+        <% }) %>
+
+    </div>
+
+</section>
+
+
+<%- include('./partials/footer') %>

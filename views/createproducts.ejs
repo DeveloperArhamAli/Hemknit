@@ -1,0 +1,46 @@
+<%- include('./partials/header') %>
+
+<% if(success.length>0){ %>
+    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-pink-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= success %>
+        </span>
+    </div>
+    <% } %>
+
+<div class="min-h-screen flex flex-col">
+    <div class="container px-10 py-10 flex flex-grow">
+        <div class="w-[15%] flex h-screen flex-col ">
+            <a href="/" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Shop</a>
+            <a href="/owners/products" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Products</a>
+            <a href="/owners/orders" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Orders</a>
+            <a href="/owners/admin" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Create Products</a>
+            <a class="bg-red-500 text-white px-3 py-3 font-semibold rounded-lg" href="/users/logout">Logout</a>
+    </div>
+
+        <main class="w-3/4 bg-white p-8 shadow ml-4">
+            <h2 class="text-xl font-bold mb-4">Create New Product</h2>
+            <form autocomplete="off" action="/product/create" method="post" enctype="multipart/form-data">
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-2">Product Details</h3>
+                    <div class="mb-4">
+                        <label class="block mb-2 font-medium">Product Image</label>
+                        <input name="image" type="file" class="py-2 px-4 rounded" value="Select File">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <input name="name" type="text" placeholder="Product Name" class="border p-2 rounded w-full">
+                        <input name="price" type="number" placeholder="Product Price" class="border p-2 rounded w-full">
+                        <input name="discount" type="number" placeholder="Discount Price" class="border p-2 rounded w-full">
+                        <input name="brand" type="text" placeholder="Product Brand" class="border p-2 rounded w-full">
+                        <input name="stock" type="number" placeholder="Product Stock" class="border p-2 rounded w-full">
+                    </div>
+                        <textarea name="description" type="text" placeholder="Product Description" class="border p-2 rounded w-full mt-4" rows="15"></textarea>
+                </div>
+                <input class="px-5 py-2 rounded mt-3 bg-pink-500 text-white" type="submit"
+                    value="Create New Product">
+            </form>
+        </main>
+    </div>
+</div>
+            
+<%- include('./partials/footer') %>

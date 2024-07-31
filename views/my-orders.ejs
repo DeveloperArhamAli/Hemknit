@@ -1,0 +1,107 @@
+<%- include ('./partials/header') %>
+
+<% if(success.length>0){ %>
+    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-pink-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= success %>
+        </span>
+    </div>
+<% } %>
+
+<% if(error.length>0){ %>
+    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-red-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= error %>
+        </span>
+    </div>
+<% } %>
+
+<div class="w-full h-full py-10">
+
+    <div class="nav w-full flex items-center justify-between">
+
+        <div>
+
+            <h1 class="text-2xl font-semibold">My Orders</h1>
+
+        </div>
+
+        <div>
+
+            <h1>Total Orders Placed: <%= orders.length %></h1>
+
+        </div>
+
+    </div>
+
+    <div class="bg-white w-full mt-4 py-5 px-3">
+
+        <% orders.forEach(order => { %>
+            
+            <div class="flex items-center justify-between mb-3 mt-3">
+
+                <div>
+
+                    <h1 class="min-w-48"><%= order._id.toString().substring(0, 11) %></h1>
+
+                </div>
+
+                <div>
+
+                    <h1><%= order.date.toDateString() %></h1>
+
+                </div>
+
+                <div class="min-w-20">
+
+                    <h1>Rs. <%= order.totalPrice %></h1>
+
+                </div>
+
+                
+            </div>
+            
+            <div class="w-full">
+                
+                <div>
+    
+                    <h1 class="
+                        <% if (order.status === 'Pending') { %>
+                            text-yellow-500
+                        <% } else if (order.status === 'Shipped') { %>
+                            text-blue-500
+                        <% } else if (order.status === 'Delivered') { %>
+                            text-green-500
+                        <% } else if (order.status === 'Cancelled') { %>
+                            text-red-500
+                        <% } %> font-semibold">
+                        <%= order.status.charAt(0).toUpperCase() + order.status.slice(1) %></h1>
+    
+                </div>
+    
+                <div class="w-full flex gap-1">
+    
+                    <% if (order.status === 'Pending') { %>
+                        <form action="/cancel-order/<%= order._id %>" class="w-1/2" method="POST"> 
+                            <button type="submit" class="w-full border bg-red-500 text-white font-semibold px-2 py-2 rounded-lg">Cancel Order</button>
+                        </form>
+                    <% } %>
+                    <form action="/order/<%= order._id %>" class="w-1/2">
+                        <button type="submit" class="w-full border px-2 py-2 rounded-lg font-semibold">View Details</button>
+                    </form>
+    
+                </div>
+
+            </div>
+
+            <hr>
+
+
+        <% }) %>
+
+    </div>
+
+</div>
+
+
+<%- include ('./partials/footer') %>

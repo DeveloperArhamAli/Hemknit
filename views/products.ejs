@@ -1,0 +1,67 @@
+<%- include ('./partials/header') %>
+
+<% if(success.length>0){ %>
+    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-pink-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= success %>
+        </span>
+    </div>
+<% } %>
+
+<% if(error.length>0){ %>
+    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-red-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= error %>
+        </span>
+    </div>
+<% } %>
+
+<div class="flex px-10 py-10">
+
+    <div class="w-[15%] flex h-fit flex-col ">
+            <a href="/" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Shop</a>
+            <a href="/owners/products" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Products</a>
+            <a href="/owners/orders" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Orders</a>
+            <a href="/owners/admin" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Create Products</a>
+            <a class="bg-red-500 text-white px-3 py-3 font-semibold rounded-lg" href="/users/logout">Logout</a>
+    </div>
+
+    <div class="w-[85%] h-full flex flex-wrap justify-evenly">
+        <% products.forEach(function(product){ %>
+            <div class="w-60">
+                <a href="/owners/products/<%= product._id %>">
+                    <div class="w-full h-64 overflow-hidden bg-white rounded-md">
+                        <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" class="w-full h-full object-fill" alt="">
+                    </div>
+                </a>
+                <div class="py-4 text-black w-full">
+                    <div class="w-full">
+                        <div class="flex justify-center w-full max-h-7 overflow-y-hidden">
+                            <a href="/owners/products/<%= product._id %>">
+                                <h1 class="text-lg"><%= product.name %></h1>
+                            </a>
+                        </div>
+                        <div class="flex justify-center w-full">
+                            <h4 class="flex items-center gap-1"><p><% if(product.discount){ %> <p class="line-through text-zinc-500">Rs.<%= product.price %></p><% } else{ %><% } %> <p class="text-pink-700 font-semibold">Rs.<%= product.price - product.discount %></p></p></h4>
+                        </div>
+                    </div>
+                    <% if(product.stock >= 1) { %>
+                        <a class="w-full h-7 flex items-center justify-center bg-white text-black gap-2 mt-1">
+                        <h2>In Stock</h2>
+                        <i class="ri-shopping-cart-2-line"></i>
+                        </a>
+                    <% } else { %>
+                        <a class="w-full h-7 flex items-center justify-center bg-white text-black gap-2 mt-1 cursor-not-allowed">
+                            <h2>Sold Out</h2>
+                        </a>
+                    <% } %>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+</div>
+
+
+
+<%- include ('./partials/footer') %>
