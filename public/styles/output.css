@@ -7,6 +7,10 @@
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
+body{
+  font-family: "Poppins", sans-serif;
+}
+
 *,
 ::before,
 ::after {
@@ -1590,6 +1594,11 @@ video {
 
 .wrapper::-webkit-scrollbar{
   display: none;
+}
+
+#makeupdiv{
+  transition: transform .5s ease-in-out, opacity .5s ease-in-out;
+  opacity: 0;
 }
 
 @layer base {

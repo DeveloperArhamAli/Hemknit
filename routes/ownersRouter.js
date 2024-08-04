@@ -6,7 +6,6 @@ const userModel = require("../models/user-model");
 const productModel = require('../models/product-model')
 const isAdmin = require("../middlewares/isAdmin");
 const { ownerLogin } = require("../controllers/authController");
-const upload = require("../config/multer-config")
 
 if(process.env.NODE_ENV === "development") {
     router.post("/create", async function (req, res) {
@@ -28,16 +27,105 @@ if(process.env.NODE_ENV === "development") {
                         password: hash,
                         isAdmin,
                     })
-                    res.status(201).send(createdOwner);
                 }
             })
         })
     })
 }
 
-router.get("/admin", isAdmin, function(req, res){
+router.get("/admin", isAdmin, async function(req, res) {
+    let success = req.flash("success");
+    let error = req.flash("error");
+
+
+    const userCount = await userModel.countDocuments();
+    const productCount = await productModel.countDocuments();
+
+    const resultofTotalOrders = await userModel.aggregate([
+        {
+            $group: {
+                _id: null,
+                totalOrders: { $sum: 
+                    { $size: "$orders" }
+                }
+            }
+        }
+    
+    ]);
+    const totalOrders = resultofTotalOrders.length > 0 ? resultofTotalOrders[0].totalOrders : 0;
+
+    const last24Hours = new Date(new Date() - 24 * 60 * 60 * 1000);
+    const resultof24hrs = await userModel.aggregate([
+        { $unwind: "$orders" },
+        { $match: { "orders.date": { $gte: last24Hours } } },
+        {
+            $group: {
+                _id: null,
+                totalOrders: { $sum: 1 }
+            }
+        }
+    ]);
+    const totalOrdersinlast24hrs = resultof24hrs.length > 0 ? resultof24hrs[0].totalOrders : 0;
+
+    const sumTotalPriceOfDeliveredOrders = await userModel.aggregate([
+        { $unwind: "$orders" },
+        { $match: { "orders.status": "Delivered" } },
+        {
+            $group: {
+                _id: null,
+                totalRevenue: { $sum: "$orders.totalPrice" }
+            }
+        }
+    ]);
+    const totalRevenue = sumTotalPriceOfDeliveredOrders.length > 0 ? sumTotalPriceOfDeliveredOrders[0].totalRevenue : 0;
+
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    const revenueInLastWeek = await userModel.aggregate([
+        { $unwind: "$orders" },
+        {
+            $match: {
+                "orders.status": "Delivered",
+                "orders.date": { $gte: oneWeekAgo }
+            }
+        },
+        {
+            $group: {
+            _id: null,
+            totalRevenueLastWeek: { $sum: "$orders.totalPrice" }
+            }
+        }
+    ]);
+    const totalRevenueLastWeek = revenueInLastWeek.length > 0 ? revenueInLastWeek[0].totalRevenueLastWeek : 0;
+
+    let orders = [];
+    try {
+        let users = await userModel.find({}).populate('orders.products.productId');
+        users.forEach(user => {
+            user.orders.forEach(order => {
+                orders.push({
+                    user: user.fullname,
+                    email: user.email,
+                    order: order,
+                    userId: user._id,
+                });
+            });
+        });
+
+        orders.sort((a, b) => b.order.date - a.order.date);
+
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+        req.flash('error', 'An error occurred while fetching orders');
+        res.redirect('/');
+    }
+
+    res.render("admin", { userCount, totalOrders, productCount, totalOrdersinlast24hrs, totalRevenue, totalRevenueLastWeek, orders, success, error, title: "Admin Dashboard" });
+})
+
+router.get("/createproducts", isAdmin, function(req, res){
     let success = req.flash("success")
-    res.render("createproducts", { success, loggedin: false })
+    res.render("createproducts", { success, title: "Create Products" })
 });
 
 router.get('/orders', isAdmin, async (req, res) => {
@@ -60,7 +148,7 @@ router.get('/orders', isAdmin, async (req, res) => {
 
         orders.sort((a, b) => b.order.date - a.order.date);
 
-        res.render('admin-orders', { orders: orders, success, error, loggedin: false });
+        res.render('admin-orders', { orders: orders, success, error, title: "Orders" });
     } catch (error) {
         console.error('Error fetching orders:', error);
         req.flash('error', 'An error occurred while fetching orders');
@@ -72,17 +160,17 @@ router.get('/products', isAdmin, async function (req, res) {
     let success = req.flash("success");
     let error = req.flash("error");
     let products = await productModel.find();
-    res.render('products', { products, success, error, loggedin: false });
+    res.render('products', { products, success, error, title: "Products" });
 })
 
 router.post('/ownerlogin', ownerLogin);
 
 router.get('/products/:id', isAdmin, async function (req, res) {
     let product = await productModel.findById(req.params.id);
-    res.render('product', { product, loggedin: false });
+    res.render('product', { product, title: product.name });
 });
 
-router.post('/products/:productId/edit', isAdmin,  upload.single("image"), async (req, res) => {    try {
+router.post('/products/:productId/edit', isAdmin, async (req, res) => {    try {
         let product = await productModel.findById(req.params.productId);
         if (!product) {
             req.flash('error', 'Product not found');
@@ -102,6 +190,24 @@ router.post('/products/:productId/edit', isAdmin,  upload.single("image"), async
     } catch (error) {
         console.error('Error updating product:', error);
         req.flash('error', 'Error updating product');
+        res.redirect('/owners/products');
+    }
+});
+
+router.post('/product/:id/delete', isAdmin, async (req, res) => {
+    try {
+        const productId = req.params.id;
+        const deletedProduct = await productModel.findByIdAndDelete(productId);
+
+        if (!deletedProduct) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        req.flash('success', 'Product deleted successfully');
+        res.redirect('/owners/products');
+    } catch (error) {
+        req.flash('error', 'Error Deleting Product')
+        console.log(error);
         res.redirect('/owners/products');
     }
 });
@@ -150,6 +256,8 @@ router.get('/orders/:orderId', isAdmin, async (req, res) => {
                     orderDetails = {
                         user: user.fullname,
                         email: user.email,
+                        address: user.address,
+                        postalCode: user.postalCode,
                         order: order,
                         userId: user._id,
                     };
@@ -157,7 +265,7 @@ router.get('/orders/:orderId', isAdmin, async (req, res) => {
             });
         });
 
-        res.render('owner-order-details', { orderDetails, success, error, loggedin: false });
+        res.render('owner-order-details', { orderDetails, success, error, title: "Order" });
     } catch (error) {
         console.error('Error fetching order details:', error);
         req.flash('error', 'An error occurred while fetching order details');

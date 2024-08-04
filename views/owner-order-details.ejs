@@ -1,4 +1,4 @@
-<%- include ('./partials/header') %>
+<%- include ('./partials/ownerheader') %>
 
 <div class="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
 
@@ -166,7 +166,19 @@
                         <div class="flex justify-center md:justify-start items-center md:items-start flex-col space-y-4 xl:mt-8">
 
                             <p class="text-base :text-white font-semibold leading-4 text-center md:text-left text-gray-800">Shipping Address</p>
-                            <p class="w-48 lg:w-full :text-gray-300 xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600"><%= orderDetails.order.address %></p>
+                            <p class="w-48 lg:w-full :text-gray-300 xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600"><%= orderDetails.address %></p>
+                            <p class="text-base :text-white font-semibold leading-4 text-center md:text-left text-gray-800">Postal Code</p>
+                            <p class="w-48 lg:w-full :text-gray-300 xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600"><%= orderDetails.postalCode %></p>
+
+                            <form action="/owners/orders/<%= orderDetails.userId %>/<%= orderDetails.order._id %>/status" method="post" class="flex flex-col">
+                                <select name="status" class="px-2 py-1">
+                                    <option value="Pending" class="text-yellow-500 font-semibold" <%= orderDetails.order.status === 'Pending' ? 'selected' : '' %>>Pending</option>
+                                    <option value="Shipped" class="text-blue-500 font-semibold" <%= orderDetails.order.status === 'Shipped' ? 'selected' : '' %>>Shipped</option>
+                                    <option value="Delivered" class="text-green-500 font-semibold" <%= orderDetails.order.status === 'Delivered' ? 'selected' : '' %>>Delivered</option>
+                                    <option value="Cancelled" class="text-red-500 font-semibold" <%= orderDetails.order.status === 'Cancelled' ? 'selected' : '' %>>Cancelled</option>
+                                </select>
+                                <button type="submit" class="border px-1 py-1 rounded-md mt-1">Update Status</button>
+                            </form>
 
                         </div>
 

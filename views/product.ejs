@@ -1,8 +1,8 @@
-<%- include('./partials/header') %>
+<%- include ('./partials/ownerheader') %>
 
 <div class="px-10 py-10 flex justify-between">
 
-    <div class="w-[15%] flex h-screen flex-col fixed">
+    <div class="w-[15%] flex h-screen flex-col">
         <a href="/" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Shop</a>
         <a href="/owners/products" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Products</a>
         <a href="/owners/orders" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Orders</a>
@@ -30,9 +30,12 @@
                 <label for="description">Product's Description</label>
                     <textarea name="description" type="text" class="border p-2 rounded w-full mt-4" rows="15"><%= product.description %></textarea>
             </div>
-            <input class="px-5 py-2 rounded mt-3 bg-pink-500 text-white" type="submit"
+            <input class="px-5 py-2 rounded mt-3 bg-pink-500 text-white cursor-pointer" type="submit"
                 value="Update Product">
-        </form>
+            </form>
+            <form action="/owners/product/<%= product._id %>/delete" method="POST">
+                <input class="px-5 py-2 rounded mt-3 bg-red-500 text-white cursor-pointer" type="submit" value="Delete Product">
+            </form>
     </main>
 
 </div>

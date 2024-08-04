@@ -16,7 +16,7 @@
     </div>
 <% } %>
 
-<div class="w-full h-full px-5 py-2">
+<!-- <div class="w-full h-full px-5 py-2">
 
     <div class="w-full flex flex-col justify-between items-center">
         <h1 class="text-3xl font-bold">My Account</h1>
@@ -34,6 +34,70 @@
         </form>
     </div>
 
-</div>
+</div> -->
+
+
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+
+    <div class="h-full p-8">
+
+        <div class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
+
+            <div class="w-full flex flex-col 2xl:w-1/3">
+
+                <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+
+                    <h4 class="text-xl text-gray-900 font-bold w-full text-center">My Account</h4>
+
+                    <form action="/users/<%= user._id %>/edit" method="POST">
+
+                        <ul class="mt-2 text-gray-700">
+
+                            <li class="flex border-y py-2">
+
+                                <span class="font-bold w-24">Name:</span>
+                                <input class="text-gray-700 w-full outline-none" value="<%= user.fullname %>">
+
+                            </li>
+
+                            <li class="flex border-b py-2">
+
+                                <span class="font-bold w-24">Email:</span>
+                                <input class="text-gray-700 w-full outline-none" value="<%= user.email %>">
+
+                            </li>
+
+                            <li class="flex border-b py-2">
+
+                                <span class="font-bold w-24">Contact: :</span>
+                                <input class="text-gray-700 w-full outline-none" value="<%= user.contactNumber ? user.contactNumber : '' %>" placeholder="Contact Number">
+
+                            </li>
+
+                            <li class="flex border-b py-2">
+
+                                <span class="font-bold w-24">Address:</span>
+                                <input class="text-gray-700 w-full outline-none" value="<%= user.address ? user.address : '' %>" placeholder="Address">
+
+                            </li>
+                            
+                            <li class="flex py-2 justify-center">
+
+                                <button type="submit" class="bg-pink-500 px-2 py-2 rounded text-white font-semibold">Update Profile</button>
+
+                            </li>
+
+                        </ul>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 <%- include ('./partials/footer') %>

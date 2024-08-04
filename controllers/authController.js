@@ -70,7 +70,7 @@ module.exports.ownerLogin = async function(req, res) {
         if(result){
             let token = generateToken(owner);
             res.cookie("token", token);
-            res.redirect("/owners/orders")
+            res.redirect("/owners/admin")
         }
         else{
             req.flash("error", "Email or Password incorrect");

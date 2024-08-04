@@ -18,11 +18,12 @@ try{ let {name, price, discount, description, brand, stock} = req.body;
     });
 
     req.flash("success", "Product created successfully")
-    res.redirect("/owners/admin");
+    res.redirect("/owners/createproducts");
 }
     catch(err) {
         res.send(err.message)
     }
 });
+
 
 module.exports = router;

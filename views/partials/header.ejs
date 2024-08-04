@@ -4,55 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miss Beauty</title>
+    <title>Miss Beauty - <%= title %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="icon" type="image/svg+xml" href="https://example.com/image.svg">
     <link rel="stylesheet" href="/styles/output.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="font-['Playwrite DE Grund Thin'] bg-gray-100 dark:bg-gray-100">
-
-    <!-- <div class="sidebar h-full w-full px-4 py-4 bg-gray-100 absolute top-0 flex flex-col justify-between">
-
-        <div>
-
-            <div class="w-full flex items-center justify-between">
-                <h1 class="text-2xl mb-5">Menu</h1>
-                <button><i class="ri-close-line text-2xl" id="close"></i></button>
-            </div>
-
-            <div class="flex items-center gap-2 w-full border px-2 py-2 bg-white mb-1">
-                <i class="ri-user-fill text-2xl"></i>
-                <a href="/login">Login or Create an Account</a>
-            </div>
-
-            <div class="flex items-center gap-2 w-full border px-2 py-2 bg-white mb-1">
-                <i class="ri-shopping-bag-fill text-2xl"></i>
-                <a href="/my-orders">View Past Orders</a>
-            </div>
-
-            <div class="flex items-center justify-between w-full border px-2 py-2 bg-white mb-1">
-                <div class="flex items-center gap-2">
-                    <i class="ri-layout-grid-fill text-2xl"></i>
-                    <a href="/orders">Categories</a>
-                </div>
-                <i class="ri-arrow-right-line text-2xl"></i>
-            </div>
-
-        </div>
-
-        <div>
-
-            <form action="/users/logout">
-                <button type="submit" class="flex items-center gap-2 w-full border px-2 py-2 bg-red-500 text-white mb-1">
-                    <i class="ri-logout-circle-r-line text-2xl"></i>
-                    <h2>Logout</h2>
-                </button>
-            </form>
-
-        </div>
-    </div> -->
+<body class="bg-gray-100 dark:bg-gray-100">
 
     <header class="w-full py-2">
 
@@ -94,13 +56,24 @@
             </div>
 
             <nav class="hidden lg:flex lg:justify-center lg:items-center mt-4 bg-pink-500 py-2 w-full">
-                <div class="flex w-3/5 justify-between">
-                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Make Up</a>
-                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Skin Care</a>
-                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Hair Care</a>
-                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Personal Care</a>
-                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Fragrances</a>
-                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Accessories</a>
+
+                <div class="flex w-full px-20 justify-between">
+
+                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0 relative" href="#" id="makeuplink">Make Up 
+
+                        <!-- <div class="h-[500px] z-10 w-screen bg-white absolute -left-full" id="makeupdiv"></div> -->
+
+                        <i class="ri-arrow-down-s-line">
+
+                        </i>
+                        
+                    </a>
+
+                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Skin Care <i class="ri-arrow-down-s-line"></i></a>
+                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Hair Care <i class="ri-arrow-down-s-line"></i></a>
+                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Personal Care <i class="ri-arrow-down-s-line"></i></a>
+                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Fragrances <i class="ri-arrow-down-s-line"></i></a>
+                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Accessories <i class="ri-arrow-down-s-line"></i></a>
                 </div>
             </nav>
 
@@ -156,6 +129,9 @@
                 <li class="mb-1">
                     <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-pink-50 hover:text-pink-600 rounded" href="/cart">Accessories</a>
                 </li>
+                <li class="mb-1 z-10">
+                    <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-pink-50 hover:text-pink-600 rounded" href="/my-orders">My Orders</a>
+                </li>
             </ul>
 
         </div>
@@ -178,11 +154,16 @@
         document.querySelector(".sidebar").style.left = "-100%"
     })
 
-    document.getElementById("openCart").addEventListener('click', function () {
-        document.querySelector(".cart").style.right = 0;
-    })
-    document.getElementById("closeCart").addEventListener('click', function () {
-        document.querySelector(".cart").style.right = "-100%";
-    })
+    // document.getElementById("makeuplink").addEventListener('mousemove', function () {
+    //     setTimeout(() => {
+    //         document.getElementById("makeupdiv").style.display = "flex";
+    //         document.getElementById("makeupdiv").style.opacity = 1;
+    //     }, 5);
+    // })
+
+    // document.getElementById("makeuplink").addEventListener('mouseleave', function () {
+    //     document.getElementById("makeupdiv").style.display = "none";
+    //     document.getElementById("makeupdiv").style.opacity = 0;
+    // })
 
 </script>

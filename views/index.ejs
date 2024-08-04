@@ -7,37 +7,89 @@
         </span>
     </div>
     <% } %>
+    
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <div class="w-full h-screen px-5">
-        <div class="w-1/2 flex items-center justify-center mb-10">
-            <div class="w-full">
-                <h4 class="text-2xl mb-5">Create your Account</h4>
-                <form autocomplete="off" action="/users/register" method="post">
-                    <input class="bg-zinc-100 block w- px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200" type="text" placeholder="Full Name" name="fullname" required>
-                    <input
-                        class="bg-zinc-100 block w- px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
-                        type="email" placeholder="Email" name="email" required>
-                    <input
-                        class="bg-zinc-100 block w- px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
-                        type="password" placeholder="Password" name="password" required>
-                    <input class="px-5 rounded-full py-3 mt-2 bg-pink-500 text-white" type="submit"
-                        value="Create My Account">
-                </form>
+<main class="relative w-full">
+
+    <div class="p-6" x-data="app">
+
+        <header class="flex w-full justify-end">
+
+            <div>
+
+                <button type="button" @click="isLoginPage = false" x-show="isLoginPage" class="rounded-2xl border-b-2 border-b-gray-300 bg-white px-4 py-3 font-bold text-pink-500 ring-2 ring-gray-300 hover:bg-gray-200 active:translate-y-[0.125rem] active:border-b-gray-200">LOGIN</button>
+
+                <button type="button" @click="isLoginPage = true" x-show="!isLoginPage" class="rounded-2xl border-b-2 border-b-gray-300 bg-white px-4 py-3 font-bold text-pink-500 ring-2 ring-gray-300 hover:bg-gray-200 active:translate-y-[0.125rem] active:border-b-gray-200">SIGN UP</button>
+
             </div>
-        </div>
-        <div class="w-1/2 flex items-center justify-center">
-            <div class="w-full">
-                <h4 class="text-2xl capitalize mb-5">login your account</h4>
-                <form autocomplete="off" action="/users/login" method="post">
-                    <input
-                        class="block bg-zinc-100 w- px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
-                        type="email" placeholder="Email" name="email">
-                    <input
-                        class="block bg-zinc-100 w- px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
-                        type="password" placeholder="Password" name="password">
-                    <input class="px-5 block rounded-full py-3 mt-2 bg-pink-500 text-white" type="submit"
-                        value="Login">
+
+        </header>
+
+        <div class="mx-auto max-w-sm transform space-y-4 text-center">
+
+            <div x-show="isLoginPage">
+
+                <header class="mb-3 text-2xl font-bold">Create your account</header>
+
+                <form action="/users/register" method="POST" class="space-y-4">
+
+                    <div class="w-full rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200 ">
+                        <input type="text" placeholder="Name" class="my-3 w-full border-none bg-transparent outline-none focus:outline-none" name="fullname" required/>
+                    </div>
+
+                    <div class="w-full rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200">
+                        <input type="text" placeholder="Email" class="my-3 w-full border-none bg-transparent outline-none focus:outline-none" name="email" required/>
+                    </div>
+
+                    <div class="w-full rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200">
+                        <input type="password" placeholder="Password" class="my-3 w-full border-none bg-transparent outline-none focus:outline-none" name="password" required/>
+                    </div>
+
+                    <button class="w-full rounded-2xl border-b-4 border-b-pink-600 bg-pink-500 py-3 font-bold text-white hover:bg-pink-400 active:translate-y-[0.125rem] active:border-b-pink-400" type="submit">CREATE ACCOUNT</button>
+
                 </form>
+
             </div>
+
+            <div x-show="!isLoginPage">
+
+                <header class="mb-3 text-2xl font-bold">Log in</header>
+                
+                <form action="/users/login" method="POST" class="space-y-4">
+
+                    <div class="w-full rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200 focus-within:ring-pink-400">
+                        <input type="text" placeholder="Email or username" class="my-3 w-full border-none bg-transparent outline-none focus:outline-none" name="email" required/>
+                    </div>
+
+                    <div class="flex w-full items-center space-x-2 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200 focus-within:ring-pink-400">
+                        <input type="password" placeholder="Password" class="my-3 w-full border-none bg-transparent outline-none" name="password" required/>
+                    </div>
+
+                    <button class="w-full rounded-2xl border-b-4 border-b-pink-600 bg-pink-500 py-3 font-bold text-white hover:bg-pink-400 active:translate-y-[0.125rem] active:border-b-pink-400" type="submit">LOG IN</button>
+
+                </form>
+
+            </div>
+
+            <footer>
+
+                <div class="mt-8 text-sm text-gray-400">
+                    By signing in to Miss Beauty you agree to our
+                    <a href="#" class="font-medium text-gray-500">Terms</a> and <a href="#" class="font-medium text-gray-500">Privacy Policy</a>.
+                </div>
+            </footer>
+
         </div>
+
     </div>
+
+</main>
+
+<script>
+    document.addEventListener("alpine:init", () => {
+        Alpine.data("app", () => ({
+            isLoginPage: true,
+        }));
+    });
+</script>

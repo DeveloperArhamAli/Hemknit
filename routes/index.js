@@ -6,25 +6,11 @@ const userModel = require("../models/user-model");
 const mongoose = require("mongoose");
 
 router.get("/", async function (req, res) {
-    let sortOption = req.query.sortby;
-    let sortCriteria;
-
-    switch (sortOption) {
-        case 'popular':
-            sortCriteria = { popularity: -1 }; 
-            break;
-        case 'newest':
-            sortCriteria = { date: -1 };
-            break;
-        default:
-            sortCriteria = {};
-    }
-
     try {
-        let products = await productModel.find().sort(sortCriteria);
+        let products = await productModel.find();
         let success = req.flash("success");
         let error = req.flash("error");
-        res.render('shop', { products, success, error, sortOption });
+        res.render('shop', { products, success, error, title: "The Place to be" });
     } catch (error) {
         console.error('Error fetching products:', error);
         req.flash('error', 'An error occurred while fetching products');
@@ -34,7 +20,7 @@ router.get("/", async function (req, res) {
 
 router.get('/login', checkIfLoggedIn, async function (req, res) {
     let error = req.flash("error");
-    res.render("index", { error, loggedin: false });
+    res.render("index", { error, title: "Login/Signup" });
 });
 
 router.get('/cart', isLoggedIn, async function (req, res) {
@@ -48,7 +34,7 @@ router.get('/cart', isLoggedIn, async function (req, res) {
 
         let totalPrice = user.cart.reduce((total, item) => total + (item.quantity * (item.productId.price - item.productId.discount) + 250 + 100), 0);
 
-        res.render('cart', { user, success, error, subTotal, totalPrice });
+        res.render('cart', { user, success, error, subTotal, totalPrice, title: "Cart" });
 });
 
 router.get('/checkout', isLoggedIn, async (req, res) => {
@@ -59,7 +45,7 @@ router.get('/checkout', isLoggedIn, async (req, res) => {
 
         let totalPrice = user.cart.reduce((total, item) => total + (item.quantity * (item.productId.price - item.productId.discount) + 250 + 100), 0);
 
-        res.render('checkout', { user, cart: user.cart, subTotal, totalPrice });
+        res.render('checkout', { user, cart: user.cart, subTotal, totalPrice, title: "CheckOut" });
     } catch (error) {
         console.error('Checkout error:', error); 
         req.flash("error", "An error occurred while processing your request");
@@ -118,12 +104,12 @@ router.post('/placeorder', isLoggedIn, async (req, res) => {
 router.get('/order-success', isLoggedIn, (req, res) => {
     let success = req.flash("success");
     let error = req.flash("error");
-    res.render('order-success', { success, error });
+    res.render('order-success', { success, error, title: "Order Success" });
 });
 
 router.get('/owner-login', function (req, res) {
     let error = req.flash("error");
-    res.render('owner-login', { error, loggedin: false });
+    res.render('owner-login', { error, title: "Owner Login" });
 })
 
 router.get('/my-orders', isLoggedIn, async  function(req, res) {
@@ -131,7 +117,7 @@ router.get('/my-orders', isLoggedIn, async  function(req, res) {
     let error = req.flash("error");
     try {
         let user = await userModel.findById(req.user._id).populate('orders.products.productId');
-        res.render('my-orders', { orders: user.orders, success, error });
+        res.render('my-orders', { orders: user.orders, success, error, title: "My Orders" });
     } catch (error) {
         console.error('Error fetching orders:', error.message);
         req.flash('error', 'Error fetching orders');
@@ -143,7 +129,7 @@ router.get('/profile', isLoggedIn, async function (req, res) {
     let success = req.flash("success");
     let error = req.flash("error");
     let user = await userModel.findOne({ email: req.user.email });
-    res.render("profile", { user, success, error })
+    res.render("profile", { user, success, error, title: "Profile" })
 })
 
 router.get('/:id', isLoggedIn, async function (req, res) {
@@ -151,7 +137,7 @@ router.get('/:id', isLoggedIn, async function (req, res) {
     try {
         let randomProducts = await productModel.aggregate([{ $sample: { size: 5 } }]);
         let product = await productModel.findById(req.params.id);
-        res.render('show', { randomProducts, product });
+        res.render('show', { randomProducts, product, title: product.name });
     } catch (error) {
         console.error('Error fetching random products:', error);
         throw error;
@@ -292,7 +278,7 @@ router.get('/order/:orderId', isLoggedIn, async (req, res) => {
         let order = user.orders.id(req.params.orderId);
 
         if (order) {
-            res.render('order-details', { order, user });
+            res.render('order-details', { order, user, title: "Order" });
         } else {
             req.flash('error', 'Order not found');
             res.redirect('/my-orders'); 
