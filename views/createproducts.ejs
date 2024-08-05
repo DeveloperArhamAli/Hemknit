@@ -8,39 +8,163 @@
     </div>
     <% } %>
 
-<div class="min-h-screen flex flex-col">
-    <div class="container px-10 py-10 flex flex-grow">
-        <div class="w-[15%] flex h-screen flex-col ">
-            <a href="/" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Shop</a>
-            <a href="/owners/products" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Products</a>
-            <a href="/owners/orders" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Orders</a>
-            <a href="/owners/admin" class="px-2 py-2 rounded-md mb-1" style="border: 2px solid pink;">Create Products</a>
-            <a class="bg-red-500 text-white px-3 py-3 font-semibold rounded-lg" href="/users/logout">Logout</a>
-    </div>
+    <div x-data="{ sidebarOpen: false }" class="flex h-screen">
 
-        <main class="w-3/4 bg-white p-8 shadow ml-4">
-            <h2 class="text-xl font-bold mb-4">Create New Product</h2>
-            <form autocomplete="off" action="/product/create" method="post" enctype="multipart/form-data">
-                <div class="mb-6">
-                    <h3 class="text-lg font-semibold mb-2">Product Details</h3>
-                    <div class="mb-4">
-                        <label class="block mb-2 font-medium">Product Image</label>
-                        <input name="image" type="file" class="py-2 px-4 rounded" value="Select File">
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <input name="name" type="text" placeholder="Product Name" class="border p-2 rounded w-full">
-                        <input name="price" type="number" placeholder="Product Price" class="border p-2 rounded w-full">
-                        <input name="discount" type="number" placeholder="Discount Price" class="border p-2 rounded w-full">
-                        <input name="brand" type="text" placeholder="Product Brand" class="border p-2 rounded w-full">
-                        <input name="stock" type="number" placeholder="Product Stock" class="border p-2 rounded w-full">
-                    </div>
-                        <textarea name="description" type="text" placeholder="Product Description" class="border p-2 rounded w-full mt-4" rows="15"></textarea>
+        <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false" class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden"></div>
+    
+        <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="inset-y-0 left-0 z-30 w-64 transition duration-300 transform bg-gray-900 lg:translate-x-0 lg:inset-0 absolute lg:relative h-[90%] lg:h-full">
+
+            <div class="flex items-center justify-center mt-8">
+
+                <div class="flex items-center">
+                    
+                    <span class="mx-2 text-2xl font-semibold text-white">Admin Dashboard</span>
+
                 </div>
-                <input class="px-5 py-2 rounded mt-3 bg-pink-500 text-white" type="submit"
-                    value="Create New Product">
-            </form>
-        </main>
+
+            </div>
+    
+            <nav class="mt-10">
+
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25" href="/owners/admin">
+
+                    <i class="ri-dashboard-fill text-2xl"></i>
+                    <span class="mx-3">Dashboard</span>
+
+                </a>
+
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                    href="/owners/orders">
+                    
+                    <i class="ri-shopping-cart-2-fill text-2xl"></i>
+                    <span class="mx-3">Orders</span>
+
+                </a>
+    
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                    href="/">
+
+                    <i class="ri-shopping-bag-fill text-2xl"></i>
+                    <span class="mx-3">Shop</span>
+
+                </a>
+    
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                    href="/owners/products">
+                    
+                    <i class="ri-shopping-bag-3-fill text-2xl"></i>
+                    <span class="mx-3">Products</span>
+
+                </a>
+
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                    href="/owners/createproducts">
+                    
+                    <i class="ri-add-line text-2xl"></i>
+                    <span class="mx-3">Create Products</span>
+
+                </a>
+
+            </nav>
+
+            <a class="flex items-center px-6 py-2 mt-4 text-white bg-red-500 absolute bottom-5 w-full" href="/users/logout">
+                    
+                    <i class="ri-arrow-right-circle-fill text-2xl"></i>
+                    <span class="mx-3">Logout</span>
+
+            </a>
+
+        </div>
+
+        <div class="flex flex-col flex-1 overflow-hidden left-0 lg:relative w-screen">
+
+            <header class="flex items-center justify-between px-6 py-4 bg-white border-b-4 border-pink-500">
+
+                <div class="flex items-center">
+
+                    <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
+
+                        <i class="ri-menu-line text-2xl"></i>
+
+                    </button>
+
+                </div>
+    
+                <div class="flex items-center">
+    
+                    <div x-data="{ dropdownOpen: false }" class="relative">
+
+                        <button @click="dropdownOpen = ! dropdownOpen"
+                            class="relative block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none">
+
+                            <img class="object-cover w-full h-full" src="/images/tmamu.jpg" alt="Image">
+
+                        </button>
+    
+                        <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full"
+                            style="display: none;"></div>
+    
+                        <div x-show="dropdownOpen"
+                            class="absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white rounded-md shadow-xl"
+                            style="display: none;">
+
+                            <a href="/owners/admin" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-500 hover:text-white">Dashboard</a>
+
+                            <a href="/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-500 hover:text-white">Shop</a>
+
+                            <a href="/owners/products" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-500 hover:text-white">Products</a>
+
+                            <a href="/owners/orders" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-500 hover:text-white">Orders</a>
+
+                            <a href="/owners/createproducts" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-500 hover:text-white">Create Products</a>
+
+                            <a href="/users/logout" class="block px-4 py-2 text-sm text-white bg-red-500">Logout</a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-white  p-5 m-5">
+
+                <h2 class="text-xl font-bold mb-4">Create New Product</h2>
+
+                <form autocomplete="off" action="/product/create" method="post" enctype="multipart/form-data">
+
+                    <div class="mb-6">
+
+                        <h3 class="text-lg font-semibold mb-2">Product Details</h3>
+
+                        <div class="mb-4">
+
+                            <label class="block mb-2 font-medium">Product Image</label>
+                            <input name="image" type="file" class="py-2 px-4 rounded" value="Select File">
+
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                            <input name="name" type="text" placeholder="Product Name" class="border p-2 rounded w-full">
+                            <input name="price" type="number" placeholder="Product Price" class="border p-2 rounded w-full">
+                            <input name="discount" type="number" placeholder="Discount Price" class="border p-2 rounded w-full">
+                            <input name="brand" type="text" placeholder="Product Brand" class="border p-2 rounded w-full">
+                            <input name="stock" type="number" placeholder="Product Stock" class="border p-2 rounded w-full">
+
+                        </div>
+
+                            <textarea name="description" type="text" placeholder="Product Description" class="border p-2 rounded w-full mt-4" rows="15"></textarea>
+
+                    </div>
+
+                    <input class="px-5 py-2 rounded mt-3 bg-pink-500 text-white cursor-pointer" type="submit" value="Create New Product">
+
+                </form>
+
+            </main>
+
+        </div>
+
     </div>
-</div>
-            
-<%- include('./partials/footer') %>

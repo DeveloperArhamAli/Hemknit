@@ -46,8 +46,14 @@ module.exports.loginUser = async function(req, res) {
 
     bcrypt.compare(password, user.password, function(err, result) {
         if(result){
+
+            let options = {
+                httpOnly: true,
+                secure: true
+            }
+
             let token = generateToken(user);
-            res.cookie("token", token);
+            res.cookie("token", token, options);
             res.redirect("/")
         }
         else{
@@ -68,8 +74,14 @@ module.exports.ownerLogin = async function(req, res) {
 
     bcrypt.compare(password, owner.password, function(err, result) {
         if(result){
+
+            let options = {
+                httpOnly: true,
+                secure: true
+            }
+
             let token = generateToken(owner);
-            res.cookie("token", token);
+            res.cookie("token", token, options);
             res.redirect("/owners/admin")
         }
         else{
