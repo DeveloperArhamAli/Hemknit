@@ -1,7 +1,7 @@
 <%- include ('./partials/ownerheader') %>
 
 <% if(success.length>0){ %>
-    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-pink-500">
+    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-pink-500">
         <span class="inline-block mt-1 mb-1 text-white">
             <%= success %>
         </span>
@@ -9,7 +9,7 @@
 <% } %>
 
 <% if(error.length>0){ %>
-    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-red-500">
+    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-red-500">
         <span class="inline-block mt-1 mb-1 text-white">
             <%= error %>
         </span>
@@ -132,66 +132,11 @@
 
         </header>
 
-        <main class="flex-1 overflow-x-hidden overflow-y-auto p-5">
-
-                    <!-- <div class="w-full flex justify-center mb-4"><h1 class="text-3xl font-semibold">Orders</h1></div>
-                        <% if (orders.length > 0) { %>
-                            <div class="bg-white px-10 py-10 w-full">
-
-                                <% orders.forEach(order => { %>
-
-                                    <div class="flex items-center justify-between mb-3 mt-3">
-                        
-                                        <div class="w-28">
-                        
-                                            <h1><%= order.user.charAt(0).toUpperCase() + order.user.slice(1) %></h1>
-                        
-                                        </div>
-
-                                        <div>
-
-                                            <h1>Rs. <%= order.order.totalPrice %></h1>
-
-                                        </div>
-                        
-                                        <div class="min-w-20">
-                        
-                                            <h1><%= order.order.date.toLocaleDateString() %></h1>
-                        
-                                        </div>
-                        
-                                        <div>
-
-                                            <form action="/owners/orders/<%= order.userId %>/<%= order.order._id %>/status" method="post" class="flex flex-col">
-                                                <select name="status" class="px-2 py-1">
-                                                    <option value="pending" class="text-yellow-500 font-semibold" <%= order.order.status === 'pending' ? 'selected' : '' %>>Pending</option>
-                                                    <option value="Shipped" class="text-blue-500 font-semibold" <%= order.order.status === 'Shipped' ? 'selected' : '' %>>Shipped</option>
-                                                    <option value="Delivered" class="text-green-500 font-semibold" <%= order.order.status === 'Delivered' ? 'selected' : '' %>>Delivered</option>
-                                                    <option value="Cancelled" class="text-red-500 font-semibold" <%= order.order.status === 'Cancelled' ? 'selected' : '' %>>Cancelled</option>
-                                                </select>
-                                                <button type="submit" class="border px-1 py-1 rounded-md mt-1">Update Status</button>
-                                            </form>
-                                    
-                                        </div>
-                        
-                                        <div>
-                                            <a href="/owners/orders/<%= order.order._id %>"><button class="border px-2 py-2 rounded-lg font-semibold">View Details</button></a>
-
-                                        </div>
-
-                                    </div>
-                                    <hr>
-
-                                <% }) %>
-
-                            </div>
-                        <% } else { %>
-                            <div class="w-full h-full flex items-center justify-center">
-                                <p>No orders found.</p>
-                            </div>
-                        <% } %> -->
+        <main class="flex-1 overflow-x-hidden overflow-y-auto p-5 scroll-smooth">
 
             <h3 class="text-3xl font-medium text-gray-700 mt-4">Orders</h3>
+
+            <a href="#pending">Pending</a>
 
             <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 mt-4">
 
@@ -281,6 +226,77 @@
                                         </td>
 
                                     </tr>
+
+                            <% }) %>
+
+                        </tbody>
+
+                        <tbody class="bg-white" id="pending">
+
+                            <% orders.forEach(order => { %>
+
+                                <% if (order.order.status === "Pending") { %>
+
+                                    <tr>
+
+                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+
+                                            <div class="flex items-center">
+
+                                                <div class="ml-4">
+
+                                                    <div class="text-sm font-medium leading-5 text-gray-900"><%= order.user.charAt(0).toUpperCase() + order.user.slice(1) %></div>
+
+                                                    <div class="text-sm leading-5 text-gray-500"><%= order.order.contactNumber %></div>
+                                                    
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+
+                                            <div class="text-sm leading-5 text-gray-900">
+                                                <%= order.order.date.toLocaleTimeString() %>
+                                            </div>
+
+                                            <div class="text-sm leading-5 text-gray-500">
+                                                <%= order.order.date.toLocaleDateString() %>
+                                            </div>
+
+                                        </td>
+
+                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+
+                                            <span class="inline-flex px-2 text-xs font-semibold leading-5 text-white rounded-full 
+                                            <% if (order.order.status === 'Pending') { %>
+                                                bg-yellow-500
+                                            <% } else if (order.order.status === 'Shipped') { %>
+                                                bg-blue-500
+                                            <% } else if (order.order.status === 'Delivered') { %>
+                                                bg-green-500
+                                            <% } else if (order.order.status === 'Cancelled') { %>
+                                                bg-red-500
+                                            <% } %>">
+                                                <%= order.order.status %>
+                                            </span>
+
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
+                                            Rs. <%= order.order.totalPrice %>
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
+
+                                            <a href="/owners/orders/<%= order.order._id %>" class="text-pink-600 hover:text-pink-900">Details</a>
+
+                                        </td>
+
+                                    </tr>
+
+                                <% } %>
 
                             <% }) %>
 

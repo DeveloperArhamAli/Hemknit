@@ -1,7 +1,7 @@
 <%- include ('./partials/header') %>
 
 <% if(success.length > 0) { %>
-    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-pink-500">
+    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-pink-500">
         <span class="inline-block mt-1 mb-1 text-white">
             <%= success %>
         </span>
@@ -9,33 +9,12 @@
 <% } %>
 
 <% if(error.length > 0) { %>
-    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-red-500">
+    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-red-500">
         <span class="inline-block mt-1 mb-1 text-white">
             <%= error %>
         </span>
     </div>
 <% } %>
-
-<!-- <div class="w-full h-full px-5 py-2">
-
-    <div class="w-full flex flex-col justify-between items-center">
-        <h1 class="text-3xl font-bold">My Account</h1>
-        <p>Welome <%= user.fullname.split(" ")[0] %></p>
-    </div>
-
-    <div class="flex flex-col items-center mt-6">
-        <h1 class="text-2xl font-bold mb-2">Account Details</h1>
-        <form action="/users/<%= user._id %>/edit" class="w-full flex flex-col items-center" method="POST">
-            <input type="text" class="w-full px-3 py-1 border rounded mb-1" name="fullname" value="<%= user.fullname %>">
-            <input type="email" class="w-full px-3 py-1 border rounded mb-1" name="email" value="<%= user.email %>">
-            <input type="number" class="w-full px-3 py-1 border rounded mb-1" name="contactNumber" value="<%= user.contactNumber ? user.contactNumber : '' %>" placeholder="Contact Number">
-            <input type="text" class="w-full px-3 py-1 border rounded mb-1" name="address" value="<%= user.address ? user.address : '' %>" placeholder="Address">
-            <button type="submit" class="bg-pink-500 px-2 py-2 rounded text-white font-semibold">Update Profile</button>
-        </form>
-    </div>
-
-</div> -->
-
 
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>

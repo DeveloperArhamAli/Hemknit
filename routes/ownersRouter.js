@@ -10,7 +10,7 @@ const { ownerLogin } = require("../controllers/authController");
 if(process.env.NODE_ENV === "development") {
     router.post("/create", async function (req, res) {
         let owners = await ownerModel.find()
-        if(owners.length > 0) {
+        if(owners.length === 2) {
             return res
             .status(500)
             .send("You dont have permissions to create a new owner")
@@ -27,6 +27,7 @@ if(process.env.NODE_ENV === "development") {
                         password: hash,
                         isAdmin,
                     })
+                    res.send(createdOwner)
                 }
             })
         })

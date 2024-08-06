@@ -30,5 +30,7 @@ module.exports = async function (req, res, next) {
     } catch (err) {
         req.flash("error", "You need to login first.")
         res.redirect("/");
+        console.log(err);
+        
     };
 };

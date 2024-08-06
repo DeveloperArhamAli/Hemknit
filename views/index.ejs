@@ -1,7 +1,7 @@
 <%- include('./partials/header') %>
 
 <% if(error.length>0){ %>
-    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-red-500">
+    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-red-500">
         <span class="inline-block mt-1 mb-1 text-white">
             <%= error %>
         </span>
@@ -18,9 +18,9 @@
 
             <div>
 
-                <button type="button" @click="isLoginPage = false" x-show="isLoginPage" class="rounded-2xl border-b-2 border-b-gray-300 bg-white px-4 py-3 font-bold text-pink-500 ring-2 ring-gray-300 hover:bg-gray-200 active:translate-y-[0.125rem] active:border-b-gray-200">LOGIN</button>
+                <button type="button" @click="isLoginPage = false" x-show="isLoginPage" class="rounded-2xl border-b-2 border-b-gray-300 bg-white px-4 py-3 font-bold text-pink-500 ring-2 ring-gray-300 hover:bg-gray-200 active:translate-y-[0.125rem] active:border-b-gray-200">SIGN UP</button>
 
-                <button type="button" @click="isLoginPage = true" x-show="!isLoginPage" class="rounded-2xl border-b-2 border-b-gray-300 bg-white px-4 py-3 font-bold text-pink-500 ring-2 ring-gray-300 hover:bg-gray-200 active:translate-y-[0.125rem] active:border-b-gray-200">SIGN UP</button>
+                <button type="button" @click="isLoginPage = true" x-show="!isLoginPage" class="rounded-2xl border-b-2 border-b-gray-300 bg-white px-4 py-3 font-bold text-pink-500 ring-2 ring-gray-300 hover:bg-gray-200 active:translate-y-[0.125rem] active:border-b-gray-200">LOGIN</button>
 
             </div>
 
@@ -28,7 +28,7 @@
 
         <div class="mx-auto max-w-sm transform space-y-4 text-center">
 
-            <div x-show="isLoginPage">
+            <div x-show="!isLoginPage">
 
                 <header class="mb-3 text-2xl font-bold">Create your account</header>
 
@@ -52,7 +52,7 @@
 
             </div>
 
-            <div x-show="!isLoginPage">
+            <div x-show="isLoginPage">
 
                 <header class="mb-3 text-2xl font-bold">Log in</header>
                 

@@ -1,7 +1,7 @@
 <%- include ('./partials/ownerheader') %>
 
 <% if(success.length>0){ %>
-    <div class="absolute bottom-2 z-10 right-2 p-3 rounded-md bg-pink-500">
+    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-pink-500">
         <span class="inline-block mt-1 mb-1 text-white">
             <%= success %>
         </span>
@@ -26,39 +26,35 @@
     
             <nav class="mt-10">
 
-                <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25" href="/owners/admin">
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="/owners/admin">
 
                     <i class="ri-dashboard-fill text-2xl"></i>
                     <span class="mx-3">Dashboard</span>
 
                 </a>
 
-                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                    href="/owners/orders">
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"href="/owners/orders">
                     
                     <i class="ri-shopping-cart-2-fill text-2xl"></i>
                     <span class="mx-3">Orders</span>
 
                 </a>
     
-                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                    href="/">
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"href="/">
 
                     <i class="ri-shopping-bag-fill text-2xl"></i>
                     <span class="mx-3">Shop</span>
 
                 </a>
     
-                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                    href="/owners/products">
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"href="/owners/products">
                     
                     <i class="ri-shopping-bag-3-fill text-2xl"></i>
                     <span class="mx-3">Products</span>
 
                 </a>
 
-                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                    href="/owners/createproducts">
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25"href="/owners/createproducts">
                     
                     <i class="ri-add-line text-2xl"></i>
                     <span class="mx-3">Create Products</span>
