@@ -1,29 +1,25 @@
 const express = require("express")
 const router = express.Router();
 const upload = require("../config/multer-config")
-const productModel = require("../models/product-model")
+const isAdmin = require("../middlewares/isAdmin");
 
-router.post("/create", upload.single("image"), async function(req, res) {
+const { 
+    createProduct, 
+    getProducts,
+    getProductDetails,
+    updateProduct,
+    deleteProduct,
+} = require("../controllers/productController");
 
-try{ let {name, price, discount, description, brand, stock} = req.body;
-    
-    let product = await productModel.create({
-        image: req.file.buffer,
-        name,
-        price,
-        discount,
-        description,
-        brand,
-        stock,
-    });
 
-    req.flash("success", "Product created successfully")
-    res.redirect("/owners/createproducts");
-}
-    catch(err) {
-        res.send(err.message)
-    }
-});
+router.post("/create",isAdmin , upload.single("image"), createProduct);
 
+router.get('/products', isAdmin, getProducts)
+
+router.get('/products/:id', isAdmin, getProductDetails);
+
+router.post('/products/:productId/edit', isAdmin, updateProduct);
+
+router.post('/product/:id/delete', isAdmin, deleteProduct);
 
 module.exports = router;

@@ -16,7 +16,7 @@ async function isLoggedIn(req, res, next) {
         next();
     } catch (err) {
         req.flash("error", "You need to login first.");
-        res.redirect("/");
+        res.redirect("/login");
     }
 }
 

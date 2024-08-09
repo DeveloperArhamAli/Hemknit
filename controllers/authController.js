@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt")
 const { generateToken } = require("../utils/generateToken");
 const ownerModel = require("../models/owner-model");
 
-module.exports.registerUser = async function(req, res){
+const registerUser = async function(req, res){
     try{
         let { email, password, fullname } = req.body;
 
@@ -35,7 +35,7 @@ module.exports.registerUser = async function(req, res){
     }
 }
 
-module.exports.loginUser = async function(req, res) {
+const loginUser = async function(req, res) {
     let {email, password} = req.body;
 
     let user = await userModel.findOne({ email: email });
@@ -58,7 +58,7 @@ module.exports.loginUser = async function(req, res) {
     })
 }
 
-module.exports.ownerLogin = async function(req, res) {
+const ownerLogin = async function(req, res) {
     let {email, password} = req.body;
 
     let owner = await ownerModel.findOne({ email: email });
@@ -81,7 +81,14 @@ module.exports.ownerLogin = async function(req, res) {
     })
 }
 
-module.exports.logout = function (req, res) {
+const logout = function (req, res) {
     res.cookie("token", "");
     res.redirect("/");
+}
+
+module.exports = {
+    registerUser,
+    loginUser,
+    ownerLogin,
+    logout,
 }
