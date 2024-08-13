@@ -10,6 +10,8 @@ const {
     getOrderDetails,
     updateUserOrderStatus,
     createProducts,
+    getProducts,
+    getProduct,
 } = require("../controllers/ownerController");
 
 
@@ -28,5 +30,9 @@ router.get('/orders/:orderId', isAdmin, getOrderDetails);
 router.post('/orders/:userId/:orderId/status', isAdmin, updateUserOrderStatus);
 
 router.get("/createproducts", isAdmin, createProducts);
+
+router.get('/products', isAdmin, getProducts);
+
+router.get('/products/:id', isAdmin, getProduct);
 
 module.exports = router;

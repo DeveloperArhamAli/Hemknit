@@ -94,6 +94,8 @@
 
             </div>
 
+            <a href="/"><h1 class="text-2xl">Miss Beauty</h1></a>
+
             <div class="flex items-center">
 
                 <div x-data="{ dropdownOpen: false }" class="relative">
@@ -135,8 +137,6 @@
         <main class="flex-1 overflow-x-hidden overflow-y-auto p-5 scroll-smooth">
 
             <h3 class="text-3xl font-medium text-gray-700 mt-4">Orders</h3>
-
-            <a href="#pending">Pending</a>
 
             <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 mt-4">
 
@@ -226,77 +226,6 @@
                                         </td>
 
                                     </tr>
-
-                            <% }) %>
-
-                        </tbody>
-
-                        <tbody class="bg-white" id="pending">
-
-                            <% orders.forEach(order => { %>
-
-                                <% if (order.order.status === "Pending") { %>
-
-                                    <tr>
-
-                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-
-                                            <div class="flex items-center">
-
-                                                <div class="ml-4">
-
-                                                    <div class="text-sm font-medium leading-5 text-gray-900"><%= order.user.charAt(0).toUpperCase() + order.user.slice(1) %></div>
-
-                                                    <div class="text-sm leading-5 text-gray-500"><%= order.order.contactNumber %></div>
-                                                    
-                                                </div>
-
-                                            </div>
-
-                                        </td>
-
-                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-
-                                            <div class="text-sm leading-5 text-gray-900">
-                                                <%= order.order.date.toLocaleTimeString() %>
-                                            </div>
-
-                                            <div class="text-sm leading-5 text-gray-500">
-                                                <%= order.order.date.toLocaleDateString() %>
-                                            </div>
-
-                                        </td>
-
-                                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-
-                                            <span class="inline-flex px-2 text-xs font-semibold leading-5 text-white rounded-full 
-                                            <% if (order.order.status === 'Pending') { %>
-                                                bg-yellow-500
-                                            <% } else if (order.order.status === 'Shipped') { %>
-                                                bg-blue-500
-                                            <% } else if (order.order.status === 'Delivered') { %>
-                                                bg-green-500
-                                            <% } else if (order.order.status === 'Cancelled') { %>
-                                                bg-red-500
-                                            <% } %>">
-                                                <%= order.order.status %>
-                                            </span>
-
-                                        </td>
-
-                                        <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                            Rs. <%= order.order.totalPrice %>
-                                        </td>
-
-                                        <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-
-                                            <a href="/owners/orders/<%= order.order._id %>" class="text-pink-600 hover:text-pink-900">Details</a>
-
-                                        </td>
-
-                                    </tr>
-
-                                <% } %>
 
                             <% }) %>
 

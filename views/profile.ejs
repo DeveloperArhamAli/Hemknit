@@ -29,7 +29,7 @@
 
                     <h4 class="text-xl text-gray-900 font-bold w-full text-center">My Account</h4>
 
-                    <form action="/users/<%= user._id %>/edit" method="POST">
+                    <form>
 
                         <ul class="mt-2 text-gray-700">
 
@@ -63,8 +63,6 @@
                             
                             <li class="flex py-2 justify-center">
 
-                                <button type="submit" class="bg-pink-500 px-2 py-2 rounded text-white font-semibold">Update Profile</button>
-
                             </li>
 
                         </ul>
@@ -73,10 +71,18 @@
 
                 </div>
 
+                <div class="flex items-center justify-center gap-5 mt-5 w-full">
+
+                    <a href="/users/my-orders" class="py-2 px-4 rounded-md bg-pink-500 text-white w-1/2 text-center md:w-1/4">View Orders</a>
+                    <a href="/users/logout" class="py-2 px-4 rounded-md bg-red-500 text-white w-1/2 text-center md:w-1/4">Logout</a>
+
+                </div>
+
+
             </div>
 
         </div>
 
     </div>
 
-<%- include ('./partials/footer') %>
+<div class="absolute w-full bottom-0"><%- include ('./partials/footer') %></div>

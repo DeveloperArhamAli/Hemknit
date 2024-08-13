@@ -1,25 +1,28 @@
 const productModel = require("../models/product-model")
 
 const createProduct = async function (req, res) {
-    try{ let {name, price, discount, description, brand, stock} = req.body;
-    
-    let product = await productModel.create({
-        image: req.file.buffer,
-        name,
-        price,
-        discount,
-        description,
-        brand,
-        stock,
-    });
+    try {
+        let { name, price, discount, description, brand, stock } = req.body;
+        
+        const image = req.files.map(file => file.buffer);
 
-    req.flash("success", "Product created successfully")
-    res.redirect("/owners/createproducts");
-}
-    catch(err) {
-        res.send(err.message)
+        let product = await productModel.create({
+            image, 
+            name,
+            price,
+            discount,
+            description,
+            brand,
+            stock,
+        });
+
+        req.flash("success", "Product created successfully");
+        res.redirect("/owners/createproducts");
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("An error occurred");
     }
-}
+};
 
 const getProducts = async function (req, res) {
     let success = req.flash("success");

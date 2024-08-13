@@ -41,7 +41,7 @@
 
             </a>
 
-            <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+            <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25"
                 href="/owners/products">
                 
                 <i class="ri-shopping-bag-3-fill text-2xl"></i>
@@ -49,7 +49,7 @@
 
             </a>
 
-            <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25"
+            <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                 href="/owners/createproducts">
                 
                 <i class="ri-add-line text-2xl"></i>
@@ -82,7 +82,9 @@
 
             </div>
 
-            <div class="flex items-center">
+            <a href="/"><h1 class="text-2xl">Miss Beauty</h1></a>
+
+            <div class="flex items-center justify-between">
 
                 <div x-data="{ dropdownOpen: false }" class="relative">
 
@@ -93,8 +95,7 @@
 
                     </button>
 
-                    <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full"
-                        style="display: none;"></div>
+                    <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full" style="display: none;"></div>
 
                     <div x-show="dropdownOpen"
                         class="absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white rounded-md shadow-xl"
@@ -126,7 +127,7 @@
 
                 <h2 class="text-xl font-bold mb-4">Edit Product</h2>
 
-                <form autocomplete="off" action="/owners/products/<%= product._id %>/edit" method="post">
+                <form autocomplete="off" action="/product/products/<%= product._id %>/edit" method="post">
 
                     <div class="mb-6">
 
@@ -157,7 +158,7 @@
 
                 </form>
 
-                <form action="/owners/product/<%= product._id %>/delete" method="POST">
+                <form action="/product/product/<%= product._id %>/delete" method="POST">
 
                     
                     <input class="px-5 py-2 rounded mt-3 bg-red-500 text-white cursor-pointer" type="submit" value="Delete Product">

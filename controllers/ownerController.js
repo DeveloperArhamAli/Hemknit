@@ -32,7 +32,6 @@ const adminDashboard = async function (req, res) {
     let success = req.flash("success");
     let error = req.flash("error");
 
-
     try {
         const userCount = await userModel.countDocuments();
         const productCount = await productModel.countDocuments();
@@ -221,6 +220,29 @@ const createProducts = function (req, res) {
     res.render("createproducts", { success, title: "Create Products" })
 }
 
+const getProducts = async function (req, res){
+    try {
+        let products = await productModel.find();
+        let success = req.flash("success");
+        let error = req.flash("error");
+        res.render('products', { products, success, error, title: "Products" });
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        req.flash('error', 'An error occurred while fetching products');
+        res.redirect('/owners/admin');
+    }
+}
+
+const getProduct = async function (req, res) {
+    try {
+        let product = await productModel.findById(req.params.id);
+        res.render('product', { product, title: product.name });
+    } catch (error) {
+        console.error('Error fetching products:', error.message);
+        res.redirect('/owners/admin');
+    }
+}
+
 module.exports = {
     createOwner,
     adminDashboard,
@@ -228,4 +250,6 @@ module.exports = {
     getOrderDetails,
     updateUserOrderStatus,
     createProducts,
+    getProducts,
+    getProduct,
 }

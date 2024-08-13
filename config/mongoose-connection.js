@@ -1,14 +1,15 @@
-const mongoose= require("mongoose");
+const mongoose = require("mongoose");
 const config = require("config");
-
 const dbgr = require("debug")("development:mongoose");
 
-mongoose.connect(`${config.get("MONGODB_URI")}/missbeauty`)
-.then(function(){
+const uri = `${config.get("MONGODB_URI")}/${config.get("DB_NAME")}`;
+
+mongoose.connect(uri)
+    .then(function() {
     dbgr("connected");
 })
-.catch(function(err){
+    .catch(function(err) {
     dbgr(err);
-})
+});
 
 module.exports = mongoose.connection;

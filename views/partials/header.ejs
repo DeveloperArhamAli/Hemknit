@@ -14,39 +14,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body">
+<body>
 
-    <header class="w-full py-2">
+    <header class="w-full py-2 border-b border-pink-500">
 
         <div class="w-full">
 
             <div class="flex items-center justify-between px-10">
 
-                <% var loggedin = typeof loggedin !== "undefined" ? loggedin : true  %>
-                <% if (loggedin) { %>
-
-                    <div class="hidden w-full text-gray-600 lg:flex lg:items-center">
-                    
-                    <div class="relative mt-6 max-w-lg">
-                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-                            <i class="ri-search-line text-xl text-gray-400"></i>
-                        </span>
-                        <input class="w-full border rounded-md pl-10 pr-4 py-2 focus:border-pink-500 focus:outline-none focus:shadow-outline" type="text" placeholder="Search">
-                    </div>
-
-                    </div>
-
-                <% } %>
-
                 <div class="lg:hidden w-full flex items-center">
                     <button><i class="ri-menu-line text-2xl text-black" id="slider"></i></button>
                 </div>
 
-                <a href="/" class="w-full">
+                <a href="/">
 
-                    <div class="w-full text-gray-700 md:text-center text-2xl font-semibold">
+                    <div class="text-gray-700 md:text-center text-xl font-semibold whitespace-nowrap">
 
-                        E-Commerce
+                        Miss Beauty
 
                     </div>
                     
@@ -54,44 +38,14 @@
 
                 <div class="flex items-center justify-end gap-2 w-full">
                     
-                    <a href="/login"><i class="ri-user-line text-xl"></i></a>
-                    <a href="/cart"><i class="ri-shopping-cart-line text-xl text-black cursor-pointer"></i></a>
+                    <a href="/login"><i class="ri-user-line text-2xl"></i></a>
+                    <a href="/cart"><i class="ri-shopping-cart-line text-2xl text-black cursor-pointer"></i></a>
 
                 </div>
 
             </div>
-
-            <nav class="hidden lg:flex lg:justify-center lg:items-center mt-4 bg-pink-500 py-2 w-full">
-
-                <div class="flex w-full px-20 justify-between">
-
-                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Make Up</a>
-                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Skin Care</a>
-                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Hair Care</a>
-                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Personal Care</a>
-                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Fragrances</a>
-                    <a class="mt-3 text-white text-lg hover:underline sm:mt-0" href="#">Accessories</a>
-                </div>
-            </nav>
 
         </div>
-
-        <% var loggedin = typeof loggedin !== "undefined" ? loggedin : true  %>
-        <% if (loggedin) { %>
-
-            <div class="flex items-center justify-center w-full text-gray-600 lg:hidden px-6">
-                        
-                <div class="relative mt-6 w-full">
-                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-                        <i class="ri-search-line text-xl text-gray-400"></i>
-                    </span>
-                    <input class="w-full border rounded-md pl-10 pr-4 py-2 focus:border-pink-500 focus:outline-none focus:shadow-outline" type="text" placeholder="Search">
-                </div>
-    
-            </div>
-
-        <% } %>
-
 
     </header>
 
@@ -125,9 +79,6 @@
                 </li>
                 <li class="mb-1">
                     <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-pink-50 hover:text-pink-600 rounded" href="/cart">Accessories</a>
-                </li>
-                <li class="mb-1 z-10">
-                    <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-pink-50 hover:text-pink-600 rounded" href="/my-orders">My Orders</a>
                 </li>
             </ul>
 

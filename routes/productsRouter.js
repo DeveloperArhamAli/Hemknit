@@ -12,7 +12,7 @@ const {
 } = require("../controllers/productController");
 
 
-router.post("/create",isAdmin , upload.single("image"), createProduct);
+router.post("/create", isAdmin , upload.array("images"), createProduct);
 
 router.get('/products', isAdmin, getProducts)
 

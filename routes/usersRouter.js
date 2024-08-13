@@ -3,14 +3,15 @@ const router = express.Router();
 const { isLoggedIn } = require("../middlewares/isLoggedIn");
 
 const { 
-    editUserDetails, 
     addToCart,
     increaseProductQuantity,
     decreaseProductQuantity,
     removeFromCart,
     placeOrder,
+    orders,
     getOrder,
-    cancelOrder
+    cancelOrder,
+    profile,
 } = require("../controllers/userController")
 
 
@@ -27,7 +28,11 @@ router.post("/login", loginUser)
 
 router.get("/logout", logout)
 
-router.post("/:userId/edit", isLoggedIn, editUserDetails)
+router.post('/placeorder', isLoggedIn, placeOrder);
+
+router.get('/my-orders', isLoggedIn, orders)
+
+router.get('/profile', isLoggedIn, profile)
 
 router.get("/addtocart/:productid", isLoggedIn, addToCart);
 
@@ -37,10 +42,8 @@ router.post('/cart/decrease/:productid', isLoggedIn, decreaseProductQuantity);
 
 router.post('/cart/remove/:productid', isLoggedIn, removeFromCart);
 
-router.post('/placeorder', isLoggedIn, placeOrder);
+router.post('/cancel-order/:orderId', isLoggedIn, cancelOrder);
 
 router.get('/order/:orderId', isLoggedIn, getOrder);
-
-router.post('/cancel-order/:orderId', isLoggedIn, cancelOrder);
 
 module.exports = router;

@@ -4,7 +4,7 @@
 
     <div class="grid grid-cols-3">
 
-        <div class="lg:col-span-2 col-span-3 space-y-8 px-12">
+        <div class="lg:col-span-2 col-span-3 space-y-8 p-2 lg:px-12">
 
             <div class="mt-8 p-4 flex flex-col sm:flex-row sm:items-center bg-white shadow rounded-md">
 
@@ -30,7 +30,7 @@
 
             <div class="rounded-md px-4">
 
-                <form id="payment-form" method="POST" action="/placeorder">
+                <form id="payment-form" method="POST" action="/users/placeorder" class="overflow-hidden">
 
                     <section>
 
@@ -56,7 +56,7 @@
 
                                 <label class="flex border-b border-gray-200 h-12 py-3 items-center">
 
-                                    <span class="text-right px-2">Postal Code: </span>
+                                    <span class="text-right px-2 whitespace-nowrap">Postal Code: </span>
 
                                     <input type="number" id="postalCode" value="<%= user.postalCode ? user.postalCode : '' %>" name="postalCode" class="focus:outline-none px-3" required>
                                     
@@ -66,7 +66,7 @@
 
                     </section>
 
-                    <h2 class="uppercase tracking-wide text-lg font-semibold text-gray-700 my-2">Payment Information: <span>Cash on Delivery</span></h2>
+                    <h2 class="uppercase tracking-wide text-sm text-gray-700 my-2">Payment Information: <span>Cash on Delivery</span></h2>
 
                     <button class="submit-button px-4 py-3 rounded-full bg-pink-400 text-white focus:ring focus:outline-none w-full text-xl font-semibold transition-colors" type="submit">Place Order</button>
 
@@ -158,4 +158,4 @@
     <p>Your cart is empty</p>
 <% } %> 
 
-<%- include ("./partials/footer") %>
+<%- include ('./partials/footer') %>

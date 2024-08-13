@@ -4,7 +4,7 @@ const userModel = require("../models/user-model")
 async function isLoggedIn(req, res, next) {
     if (!req.cookies.token) {
         req.flash("error", "You need to login first");
-        return res.redirect("/");
+        return res.redirect("/login");
     }
 
     try {
@@ -27,7 +27,7 @@ async function checkIfLoggedIn(req, res, next) {
             let user = await userModel.findOne({ email: decoded.email })
             .select("-password");
             req.user = user;
-            return res.redirect("/profile");
+            return res.redirect("/users/profile");
         } catch (err) {
             res.redirect("/login");
         }

@@ -16,56 +16,56 @@
     </div>
 <% } %>
 
-<section class="py-10">
+<section class="py-2">
 
-    <div class="p-6 whitespace-nowrap overflow-x-auto overflow-y-hidden flex wrapper relative scroll-smooth">
+    <div class="p-6 flex flex-wrap items-center justify-center gap-5 relative">
 
         <% products.forEach(function(product) { %>
 
-            <div class="w-40 mr-2">
+            <div class="w-36 h-52 mb-10">
     
-            <a href="/<%= product._id %>">
-    
-                <div class="relative flex items-end overflow-hidden w-full h-32">
+                <a href="/<%= product._id %>">
+        
+                    <div class="relative flex items-end overflow-hidden w-full h-32">
 
-                    <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="Product Image" class="w-full h-full" />
-
-                </div>
-
-                <div class="mt-2 flex flex-col overflow-hidden">
-
-                    <h2 class="text-slate-700 text-md text-center px-5 overflow-hidden"><%= product.name %></h2>
-                    <% if (product.brand) { %>
-                        <p class="mt-1 text-sm text-slate-400 text-center hidden">
-                            by <%= product.brand %>
-                        </p>
-                    <% } %>
-
-                    <div class="flex flex-col items-center justify-between w-full">
-
-                        <p class="text-sm font-bold mb-1 text-pink-400">
-                            Rs.<%= product.price - product.discount %>
-                        </p>
-
-                        <% if(product.stock >= 1) { %>
-                        <a class="flex items-center space-x-1.5 bg-pink-500 px-4 py-1.5 w-full text-white duration-100 hover:bg-pink-600" href="/addtocart/<%= product._id %>">
-                            <i class="ri-shopping-cart-line"></i>
-                            <button class="text-sm">Add to cart</button>
-                        </a>
-
-                        <% } else { %>
-                                <a class="flex items-center space-x-1.5 bg-pink-500 px-4 py-1.5 w-full text-white duration-100 hover:bg-pink-600 cursor-not-allowed">
-                                <i class="ri-shopping-cart-line"></i>
-                                <button class="text-sm">Sold Out</button>
-                            </a>
-                        <% } %>
+                        <img src="data:image/jpeg;base64,<%= product.image[0].toString('base64') %>" alt="Product Image" class="w-full h-full" />
 
                     </div>
 
-                </div>
-    
-            </a>
-    
+                    <div class="mt-2 flex flex-col overflow-hidden">
+
+                        <h2 class="text-slate-700 text-md text-center px-5 whitespace-nowrap overflow-hidden text-ellipsis"><%= product.name %></h2>
+                        <% if (product.brand) { %>
+                            <p class="mt-1 text-sm text-slate-400 text-center hidden">
+                                by <%= product.brand %>
+                            </p>
+                        <% } %>
+
+                        <div class="flex flex-col items-center justify-between w-full">
+
+                            <p class="text-sm font-bold mb-1 text-pink-400">
+                                Rs.<%= product.price - product.discount %>
+                            </p>
+
+                            <% if(product.stock >= 1) { %>
+                            <a class="flex items-center space-x-1.5 bg-pink-500 px-4 py-1.5 w-full text-white duration-100 hover:bg-pink-600" href="/users/addtocart/<%= product._id %>">
+                                <i class="ri-shopping-cart-line"></i>
+                                <button class="text-sm">Add to cart</button>
+                            </a>
+
+                            <% } else { %>
+                                    <a class="flex items-center space-x-1.5 bg-pink-500 px-4 py-1.5 w-full text-white duration-100 hover:bg-pink-600 cursor-not-allowed">
+                                    <i class="ri-shopping-cart-line"></i>
+                                    <button class="text-sm">Sold Out</button>
+                                </a>
+                            <% } %>
+
+                        </div>
+
+                    </div>
+        
+                </a>
+
             </div>
 
         <% }) %>
@@ -74,30 +74,4 @@
 
 </section>
 
-<script>
-
-    let wrapper = document.querySelector(".wrapper");
-    let nextBtn = document.getElementById("nextBtn");
-    let backBtn = document.getElementById("backBtn");
-
-    wrapper.addEventListener("mousemove", function(){
-        nextBtn.style.display = "flex";
-        backBtn.style.display = "flex";
-    })
-
-    wrapper.addEventListener("mouseleave", function(){
-        nextBtn.style.display = "none";
-        backBtn.style.display = "none";
-    })
-
-    nextBtn.addEventListener("click", function(){
-        wrapper.scrollLeft += 10000;
-    })
-
-    backBtn.addEventListener("click", function(){
-        wrapper.scrollLeft -= 10000;
-    })
-
-</script>
-
-<%- include('./partials/footer') %>
+<%- include ('./partials/footer') %>

@@ -98,6 +98,8 @@
 
             </div>
 
+            <a href="/"><h1 class="text-2xl">Miss Beauty</h1></a>
+
             <div class="flex items-center">
 
                 <div x-data="{ dropdownOpen: false }" class="relative">
@@ -138,24 +140,35 @@
 
         <main class="flex-1 overflow-x-hidden overflow-y-auto">
 
-            <div class="p-6 whitespace-nowrap overflow-x-auto overflow-y-hidden flex wrapper relative scroll-smooth">
+            <div class="p-6 flex flex-wrap items-center justify-center gap-5 relative wrapper">
 
                 <% products.forEach(function(product){ %>
-                    <div class="min-w-60 mr-5">
+                    <div class="w-36 h-52 mb-10">
                         <a href="/owners/products/<%= product._id %>">
-                            <div class="w-full h-64 overflow-hidden bg-white rounded-md">
-                                <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" class="w-full h-full object-fill" alt="">
+                            <div class="relative flex items-end overflow-hidden w-full h-32">
+                                <img src="data:image/jpeg;base64,<%= product.image[0].toString('base64') %>" class="w-full h-full" alt="">
                             </div>
                         </a>
                         <div class="py-4 text-black w-full">
                             <div class="w-full">
-                                <div class="flex justify-center w-full max-h-7 overflow-y-hidden">
+                                <div>
                                     <a href="/owners/products/<%= product._id %>">
-                                        <h1 class="text-md"><%= product.name %></h1>
+                                        <h1 class="text-md  whitespace-nowrap overflow-hidden text-ellipsis text-center"><%= product.name %></h1>
                                     </a>
                                 </div>
                                 <div class="flex justify-center w-full">
-                                    <h4 class="flex items-center gap-1"><p><% if(product.discount){ %> <p class="line-through text-zinc-500">Rs.<%= product.price %></p><% } else{ %><% } %> <p class="text-pink-700 font-semibold">Rs.<%= product.price - product.discount %></p></p></h4>
+                                    <h4 class="flex items-center gap-1">
+                                        <p>
+                                            <% if(product.discount){ %> 
+                                            <p class="line-through text-zinc-500">
+                                                Rs.<%= product.price %>
+                                            </p>
+                                            <% } else{ %><% } %> 
+                                            <p class="text-pink-700 font-semibold">
+                                                Rs.<%= product.price - product.discount %>
+                                            </p>
+                                        </p>
+                                    </h4>
                                 </div>
                             </div>
                             <% if(product.stock >= 1) { %>
@@ -164,7 +177,7 @@
                                 <i class="ri-shopping-cart-2-line"></i>
                                 </a>
                             <% } else { %>
-                                <a class="w-full h-7 flex items-center justify-center bg-white text-black gap-2 mt-1 cursor-not-allowed">
+                                <a class="w-full h-7 flex items-center justify-center bg-red-500 text-white gap-2 mt-1 cursor-not-allowed">
                                     <h2>Sold Out</h2>
                                 </a>
                             <% } %>
