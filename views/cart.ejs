@@ -1,7 +1,7 @@
 <%- include('./partials/header') %>
 
 <% if(success.length>0){ %>
-    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-pink-500">
+    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-orange-500">
         <span class="inline-block mt-1 mb-1 text-white">
             <%= success %>
         </span>
@@ -47,7 +47,7 @@
     
                                 <form action="/users/cart/decrease/<%= item.productId._id %>" method="POST">
 
-                                    <button class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-pink-500 hover:text-pink-50" type="submit" id="subtract"> - </button>
+                                    <button class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-orange-500 hover:text-orange-50" type="submit" id="subtract"> - </button>
 
                                 </form>
 
@@ -55,7 +55,7 @@
 
                                 <form action="/users/cart/increase/<%= item.productId._id %>" method="POST">
 
-                                    <button class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-pink-500 hover:text-pink-50" type="submit" id="add"> + </button>
+                                    <button class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-orange-500 hover:text-orange-50" type="submit" id="add"> + </button>
 
                                 </form>
     
@@ -129,7 +129,7 @@
 
             </div>
 
-            <a href="/checkout"><button class="mt-6 w-full rounded-md bg-pink-500 py-1.5 font-medium text-pink-50 hover:bg-pink-600">Check out</button></a>
+            <a href="/checkout"><button class="mt-6 w-full rounded-md bg-orange-500 py-1.5 font-medium text-orange-50 hover:bg-orange-600">Check out</button></a>
 
         </div>
 
@@ -142,7 +142,7 @@
     <div class="h-[80vh] w-screen flex flex-col items-center justify-center">
 
         <h1 class="text-2xl font-semibold">Your cart is Empty!</h1>
-        <a href="/" class="w-fit px-3 py-2 flex items-center justify-center bg-pink-500 text-white gap-2 mt-1 rounded">Continue Shopping</a>
+        <a href="/" class="w-fit px-3 py-2 flex items-center justify-center bg-orange-500 text-white gap-2 mt-1 rounded">Continue Shopping</a>
 
     </div>
 

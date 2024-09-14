@@ -18,9 +18,9 @@
 
             <div>
 
-                <button type="button" @click="isLoginPage = false" x-show="isLoginPage" class="rounded-2xl border-b-2 border-b-gray-300 bg-white px-4 py-3 font-bold text-pink-500 ring-2 ring-gray-300 hover:bg-gray-200 active:translate-y-[0.125rem] active:border-b-gray-200">SIGN UP</button>
+                <button type="button" @click="isLoginPage = false" x-show="isLoginPage" class="rounded-2xl border-b-2 border-b-gray-300 bg-white px-4 py-3 font-bold text-orange-500 ring-2 ring-gray-300 hover:bg-gray-200 active:translate-y-[0.125rem] active:border-b-gray-200">SIGN UP</button>
 
-                <button type="button" @click="isLoginPage = true" x-show="!isLoginPage" class="rounded-2xl border-b-2 border-b-gray-300 bg-white px-4 py-3 font-bold text-pink-500 ring-2 ring-gray-300 hover:bg-gray-200 active:translate-y-[0.125rem] active:border-b-gray-200">LOGIN</button>
+                <button type="button" @click="isLoginPage = true" x-show="!isLoginPage" class="rounded-2xl border-b-2 border-b-gray-300 bg-white px-4 py-3 font-bold text-orange-500 ring-2 ring-gray-300 hover:bg-gray-200 active:translate-y-[0.125rem] active:border-b-gray-200">LOGIN</button>
 
             </div>
 
@@ -46,7 +46,7 @@
                         <input type="password" placeholder="Password" class="my-3 w-full border-none bg-transparent outline-none focus:outline-none" name="password" required/>
                     </div>
 
-                    <button class="w-full rounded-2xl border-b-4 border-b-pink-600 bg-pink-500 py-3 font-bold text-white hover:bg-pink-400 active:translate-y-[0.125rem] active:border-b-pink-400" type="submit">CREATE ACCOUNT</button>
+                    <button class="w-full rounded-2xl border-b-4 border-b-orange-600 bg-orange-500 py-3 font-bold text-white hover:bg-orange-400 active:translate-y-[0.125rem] active:border-b-orange-400" type="submit">CREATE ACCOUNT</button>
 
                 </form>
 
@@ -58,15 +58,15 @@
                 
                 <form action="/users/login" method="POST" class="space-y-4">
 
-                    <div class="w-full rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200 focus-within:ring-pink-400">
+                    <div class="w-full rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200 focus-within:ring-orange-400">
                         <input type="text" placeholder="Email or username" class="my-3 w-full border-none bg-transparent outline-none focus:outline-none" name="email" required/>
                     </div>
 
-                    <div class="flex w-full items-center space-x-2 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200 focus-within:ring-pink-400">
+                    <div class="flex w-full items-center space-x-2 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200 focus-within:ring-orange-400">
                         <input type="password" placeholder="Password" class="my-3 w-full border-none bg-transparent outline-none" name="password" required/>
                     </div>
 
-                    <button class="w-full rounded-2xl border-b-4 border-b-pink-600 bg-pink-500 py-3 font-bold text-white hover:bg-pink-400 active:translate-y-[0.125rem] active:border-b-pink-400" type="submit">LOG IN</button>
+                    <button class="w-full rounded-2xl border-b-4 border-b-orange-600 bg-orange-500 py-3 font-bold text-white hover:bg-orange-400 active:translate-y-[0.125rem] active:border-b-orange-400" type="submit">LOG IN</button>
 
                 </form>
 
