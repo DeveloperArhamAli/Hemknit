@@ -19,8 +19,8 @@
         
                         <div class="pb-4 md:pb-8 w-full md:w-40">
 
-                            <img class="w-full hidden md:block" src="data:image/jpeg;base64,<%= product.productId.image.toString('base64') %>" alt="product image" />
-                            <img class="w-full md:hidden" src="data:image/jpeg;base64,<%= product.productId.image.toString('base64') %>" alt="product image" />
+                            <img class="w-full hidden md:block" src="data:image/jpeg;base64,<%= product.productId.image[0].toString('base64') %>" alt="product image" style="aspect-ratio: 1/1; object-fit: contain;"/>
+                            <img class="w-full md:hidden" src="data:image/jpeg;base64,<%= product.productId.image.toString('base64') %>" alt="product image" style="aspect-ratio: 1/1; object-fit: contain;"/>
 
                         </div>
         

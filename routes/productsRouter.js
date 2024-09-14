@@ -9,12 +9,21 @@ const {
     getProductDetails,
     updateProduct,
     deleteProduct,
+    createCategory,
+    editCategory,
+    deleteCategory,
 } = require("../controllers/productController");
 
 
 router.post("/create", isAdmin , upload.array("images"), createProduct);
 
 router.get('/products', isAdmin, getProducts)
+
+router.post('/createCategory', isAdmin, createCategory);
+
+router.post('/category/:id/edit', isAdmin, editCategory);
+
+router.get('/category/:id/delete', isAdmin, deleteCategory);
 
 router.get('/products/:id', isAdmin, getProductDetails);
 

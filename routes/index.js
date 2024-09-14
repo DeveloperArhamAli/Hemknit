@@ -11,7 +11,9 @@ const {
     orderSuccess,
     ownerLoginPage,
     termsofService,
-    privacyPolicy
+    privacyPolicy,
+    getProductsByCategory,
+    getProductsBySubCategory,
 } = require("../controllers/indexController");
 
 
@@ -31,6 +33,10 @@ router.get('/termsofservice', termsofService)
 
 router.get('/privacypolicy', privacyPolicy)
 
-router.get('/:id', isLoggedIn, getProduct);
+router.get('/:id', getProduct);
+
+router.get('/category/:id', getProductsByCategory);
+
+router.get('/subcategory/:subCategory', getProductsBySubCategory);
 
 module.exports = router;

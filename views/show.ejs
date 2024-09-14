@@ -13,13 +13,13 @@
                     <div class="mr-2">
                         <% product.image.forEach((image, index) => { %>
                             <div class="w-14">
-                                <img src="data:image/png;base64,<%= image.toString('base64') %>" alt="Product Image <%= index + 1 %>" class="thumbnail" onclick="displayImage('<%= image.toString('base64') %>')">
+                                <img src="data:image/png;base64,<%= image.toString('base64') %>" alt="Product Image <%= index + 1 %>" class="thumbnail" style="aspect-ratio: 1/1; object-fit: contain" onmouseenter="displayImage('<%= image.toString('base64') %>')">
                             </div>
                         <% }) %>
                     </div>
 
-                    <div>
-                        <img class="h-full w-full rounded-md object-cover max-w-lg" id="displayedImage" src="data:image/png;base64,<%= product.image[0].toString('base64') %>" alt="Selected Product Image">
+                    <div class="h-96 w-96">
+                        <img class="h-full w-full rounded-md object-cover max-w-lg" id="displayedImage" src="data:image/png;base64,<%= product.image[0].toString('base64') %>" alt="Selected Product Image" style="aspect-ratio: 1/1; object-fit: contain;" >
                     </div>
 
                 </div>
@@ -105,7 +105,7 @@
                             
                             <div class="w-40 mr-5 rounded-md shadow-md overflow-hidden cursor-pointer">
         
-                                <img class="w-full bg-cover" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" />
+                                <img class="w-full bg-cover" src="data:image/jpeg;base64,<%= product.image[0].toString('base64') %>" style="aspect-ratio: 1/1; object-fit: contain;" />
         
                                 <div class="px-5 py-3">
         
@@ -129,22 +129,6 @@
     </main>
     
 </div>
-
-<!-- <div class="container">
-    <div class="images-list">
-        <% product.image.forEach((image, index) => { %>
-            <img 
-                src="data:image/png;base64,<%= image.toString('base64') %>" 
-                alt="Product Image <%= index + 1 %>" 
-                class="thumbnail w-20" 
-                onclick="displayImage('<%= image.toString('base64') %>')">
-        <% }) %>
-    </div>
-
-    <div class="image-display w-40 overflow-hidden">
-        <img id="displayedImage" src="data:image/png;base64,<%= product.image[0].toString('base64') %>" alt="Selected Product Image">
-    </div>
-</div> -->
 
 <script>
     function displayImage(imageBase64) {

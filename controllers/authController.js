@@ -49,6 +49,7 @@ const loginUser = async function(req, res) {
 
             let token = generateToken(user);
             res.cookie("token", token);
+            req.flash("success", "Logged in successfully")
             res.redirect("/")
         }
         else{
@@ -83,6 +84,7 @@ const ownerLogin = async function(req, res) {
 
 const logout = function (req, res) {
     res.cookie("token", "");
+    req.flash("success", "Logged out successfully")
     res.redirect("/");
 }
 

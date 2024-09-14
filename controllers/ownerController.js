@@ -1,7 +1,8 @@
 const bcrypt = require("bcrypt")
 const ownerModel = require("../models/owner-model");
 const userModel = require("../models/user-model");
-const productModel = require('../models/product-model')
+const productModel = require('../models/product-model');
+const categoryModel = require("../models/category-model");
 
 const createOwner = async function (req, res) {
     let owners = await ownerModel.find()
@@ -215,9 +216,11 @@ const updateUserOrderStatus = async function (req, res) {
     }
 }
 
-const createProducts = function (req, res) {
+const createProducts = async function (req, res) {
     let success = req.flash("success")
-    res.render("createproducts", { success, title: "Create Products" })
+    let error = req.flash("error")
+    let categories = await categoryModel.find()
+    res.render("createproducts", { success, error, categories, title: "Create Products" })
 }
 
 const getProducts = async function (req, res){
@@ -236,11 +239,26 @@ const getProducts = async function (req, res){
 const getProduct = async function (req, res) {
     try {
         let product = await productModel.findById(req.params.id);
-        res.render('product', { product, title: product.name });
+        const categories = await categoryModel.find();
+        res.render('product', { product, categories, title: product.name });
     } catch (error) {
         console.error('Error fetching products:', error.message);
         res.redirect('/owners/admin');
     }
+}
+
+const createCategory = async function (req, res) {
+    let success = req.flash("success");
+    let error = req.flash("error");
+    let categories = await categoryModel.find();
+    res.render("createcategory", { success, error, categories, title: "Create Category" });
+}
+
+const editCategory = async function (req, res) {
+    let success = req.flash("success");
+    let error = req.flash("error");
+    let category = await categoryModel.findById(req.params.id);
+    res.render("editcategory", { success, error, category, title: "Edit Category" });
 }
 
 module.exports = {
@@ -252,4 +270,6 @@ module.exports = {
     createProducts,
     getProducts,
     getProduct,
+    createCategory,
+    editCategory,
 }

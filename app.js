@@ -27,11 +27,12 @@ app.use(
 app.use(flash());
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
-app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use("/", indexRouter);
 app.use("/owners", ownersRouter);
 app.use("/users", usersRouter);
 app.use("/product", productsRouter);
 
-app.listen(3000);
+app.listen(process.env.PORT, () => {
+    console.log(`App running on http://localhost:${process.env.PORT}`);
+})

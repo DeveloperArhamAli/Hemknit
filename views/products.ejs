@@ -73,6 +73,13 @@
 
             </a>
 
+            <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"href="/owners/createCategory">
+                    
+                <i class="ri-add-line text-2xl"></i>
+                <span class="mx-3">Create Categories</span>
+
+            </a>
+
         </nav>
 
         <a class="flex items-center px-6 py-2 mt-4 text-white bg-red-500 absolute bottom-5 w-full" href="/users/logout">
@@ -128,6 +135,8 @@
 
                         <a href="/owners/createproducts" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-500 hover:text-white">Create Products</a>
 
+                        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-500 hover:text-white"href="/owners/createCategory">Create Categories</a>
+
                         <a href="/users/logout" class="block px-4 py-2 text-sm text-white bg-red-500">Logout</a>
 
                     </div>
@@ -143,45 +152,54 @@
             <div class="p-6 flex flex-wrap items-center justify-center gap-5 relative wrapper">
 
                 <% products.forEach(function(product){ %>
-                    <div class="w-36 h-52 mb-10">
+
+                    <div class="w-[300px] h-[400px] p-5 shadow-xl">
+    
                         <a href="/owners/products/<%= product._id %>">
-                            <div class="relative flex items-end overflow-hidden w-full h-32">
-                                <img src="data:image/jpeg;base64,<%= product.image[0].toString('base64') %>" class="w-full h-full" alt="">
+                
+                            <div class="relative flex items-end overflow-hidden]">
+        
+                                <img src="data:image/jpeg;base64,<%= product.image[0].toString('base64') %>" alt="Product Image" class="w-full h-full" style="aspect-ratio: 1/1; object-fit: contain;" />
+        
                             </div>
-                        </a>
-                        <div class="py-4 text-black w-full">
-                            <div class="w-full">
-                                <div>
-                                    <a href="/owners/products/<%= product._id %>">
-                                        <h1 class="text-md  whitespace-nowrap overflow-hidden text-ellipsis text-center"><%= product.name %></h1>
-                                    </a>
-                                </div>
-                                <div class="flex justify-center w-full">
-                                    <h4 class="flex items-center gap-1">
-                                        <p>
-                                            <% if(product.discount){ %> 
-                                            <p class="line-through text-zinc-500">
-                                                Rs.<%= product.price %>
-                                            </p>
-                                            <% } else{ %><% } %> 
-                                            <p class="text-pink-700 font-semibold">
-                                                Rs.<%= product.price - product.discount %>
-                                            </p>
+        
+                            <div class="mt-2 flex flex-col overflow-hidden">
+        
+                                <h2 class="text-orange-500 font-bold text-md text-center px-5 whitespace-nowrap overflow-hidden text-ellipsis"><%= product.name %></h2>
+                                <% if (product.brand) { %>
+                                    <p class="mt-1 text-sm text-slate-400 text-center hidden">
+                                        by <%= product.brand %>
+                                    </p>
+                                <% } %>
+        
+                                <div class="flex flex-col items-center justify-between w-full">
+        
+                                    <div class="flex gap-2">
+    
+                                        <p class="line-through">Rs. <%= product.price %></p>
+                                        <p class="font-semibold mb-1 text-black">
+                                            Rs.<%= product.price - product.discount %>
                                         </p>
-                                    </h4>
+    
+                                    </div>
+        
+                                    <% if(product.stock >= 1) { %>
+                                        <a class="w-full h-7 flex items-center justify-center bg-orange-500 text-white p-5 gap-2 mt-1">
+                                        <h2>In Stock</h2>
+                                        <i class="ri-shopping-cart-2-line"></i>
+                                        </a>
+                                    <% } else { %>
+                                        <a class="w-full h-7 flex items-center justify-center bg-red-500 text-white p-5 gap-2 mt-1 cursor-not-allowed">
+                                            <h2>Sold Out</h2>
+                                        </a>
+                                    <% } %>
+        
                                 </div>
+        
                             </div>
-                            <% if(product.stock >= 1) { %>
-                                <a class="w-full h-7 flex items-center justify-center bg-white text-black gap-2 mt-1">
-                                <h2>In Stock</h2>
-                                <i class="ri-shopping-cart-2-line"></i>
-                                </a>
-                            <% } else { %>
-                                <a class="w-full h-7 flex items-center justify-center bg-red-500 text-white gap-2 mt-1 cursor-not-allowed">
-                                    <h2>Sold Out</h2>
-                                </a>
-                            <% } %>
-                        </div>
+                
+                        </a>
+        
                     </div>
                 <% }) %>
         

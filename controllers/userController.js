@@ -1,5 +1,6 @@
 const productModel = require("../models/product-model");
 const userModel = require("../models/user-model");
+const categoryModel = require("../models/category-model");
 const mongoose = require("mongoose");
 
 const addToCart = async function (req, res) {
@@ -161,7 +162,8 @@ const orders = async function (req, res) {
     let error = req.flash("error");
     try {
         let user = await userModel.findById(req.user._id).populate('orders.products.productId');
-        res.render('my-orders', { orders: user.orders, success, error, title: "My Orders" });
+        let categories = await categoryModel.find();
+        res.render('my-orders', { categories ,orders: user.orders, success, error, title: "My Orders" });
     } catch (error) {
         console.error('Error fetching orders:', error.message);
         req.flash('error', 'Error fetching orders');
@@ -174,9 +176,10 @@ const getOrder = async function (req, res) {
         let user = await userModel.findOne({ 'orders._id': req.params.orderId }).populate('orders.products.productId');
 
         let order = user.orders.id(req.params.orderId);
+        let categories = await categoryModel.find();
 
         if (order) {
-            res.render('order-details', { order, user, title: "Order" });
+            res.render('order-details', { categories ,order, user, title: "Order" });
         } else {
             req.flash('error', 'Order not found');
             res.redirect('/my-orders'); 
@@ -214,7 +217,8 @@ const profile = async function (req, res) {
         let success = req.flash("success");
         let error = req.flash("error");
         const user = await userModel.findOne({ email: req.user.email });
-        res.render("profile", { user, success, error, title: "Profile" })
+        let categories = await categoryModel.find();
+        res.render("profile", { categories ,user, success, error, title: "Profile" })
     } catch (error) {
         console.error("An error occurd while viewing the profile", error.message);
         res.redirect("/");

@@ -13,11 +13,10 @@ const productSchema = mongoose.Schema({
     },
     brand: String,
     stock: Number,
-    popularity: Number,
-    date: {
-        type: Date,
-        default: Date.now
-    },
+    category: String,
+    subCategory: [{
+        type: String,
+    }],
 });
 
 module.exports = mongoose.model("product", productSchema);

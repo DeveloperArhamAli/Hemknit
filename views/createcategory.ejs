@@ -62,14 +62,14 @@
 
                 </a>
 
-                <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25"href="/owners/createproducts">
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"href="/owners/createproducts">
                     
                     <i class="ri-add-line text-2xl"></i>
                     <span class="mx-3">Create Products</span>
 
                 </a>
 
-                <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"href="/owners/createCategory">
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25"href="/owners/createCategory">
                     
                     <i class="ri-add-line text-2xl"></i>
                     <span class="mx-3">Create Categories</span>
@@ -131,7 +131,7 @@
 
                             <a href="/owners/createproducts" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-500 hover:text-white">Create Products</a>
 
-                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-500 hover:text-white" href="/owners/createCategory">Create Categories</a>
+                            <a href="/owners/createCategory" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-500 hover:text-white">Create Categories</a>
 
                             <a href="/users/logout" class="block px-4 py-2 text-sm text-white bg-red-500">Logout</a>
 
@@ -145,74 +145,43 @@
 
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-white  p-5 m-5">
 
-                <h2 class="text-xl font-bold mb-4">Create New Product</h2>
+                <h2 class="text-xl font-bold mb-4">Create New Category</h2>
 
-                <form autocomplete="off" action="/product/create" method="post" enctype="multipart/form-data">
+                <form action="/product/createCategory" method="post">
 
                     <div class="mb-6">
 
-                        <h3 class="text-lg font-semibold mb-2">Product Details</h3>
-
-                        <div class="mb-4">
-
-                            <label class="block mb-2 font-medium">Product Image</label>
-                            <input name="images" type="file" multiple class="py-2 px-4 rounded" value="Select File"> (1000px * 1000px)
-
-                        </div>
-
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
-                            <input name="name" type="text" placeholder="Product Name" class="border p-2 rounded w-full">
-                            <input name="price" type="number" placeholder="Product Price" class="border p-2 rounded w-full">
-                            <input name="discount" type="number" placeholder="Discount Price" class="border p-2 rounded w-full">
-                            <input name="brand" type="text" placeholder="Product Brand" class="border p-2 rounded w-full">
-                            <input name="stock" type="number" placeholder="Product Stock" class="border p-2 rounded w-full">
-
-                            <select id="categorySelect" name="category" onchange="updateSubcategories()" class="border p-2 rounded w-full text-gray-400">
-                                <option disabled selected>Select a category</option>
-                                <% categories.forEach(category => { %>
-                                    <option value="<%= category.name %>" data-subcategories='<%= JSON.stringify(category.subCategory) %>'>
-                                        <%= category.name %>
-                                    </option>
-                                <% }) %>
-                            </select>
-                    
-                            <select id="subCategorySelect" name="subCategory" class="border p-2 rounded w-full text-gray-400" multiple>
-                                <option value="" disabled selected>Select a subcategory</option>
-                                <!-- Subcategories will be populated here dynamically -->
-                            </select>
+                            <input name="name" type="text" placeholder="Category Name" class="border p-2 rounded w-full">
+                            <input name="subCategory" type="text" placeholder="Sub Category" class="border p-2 rounded w-full">
 
                         </div>
-
-                            <textarea name="description" type="text" placeholder="Product Description" class="border p-2 rounded w-full mt-4" rows="15"></textarea>
 
                     </div>
 
-                    <input class="px-5 py-2 rounded mt-3 bg-pink-500 text-white cursor-pointer" type="submit" value="Create New Product">
+                    <input class="px-5 py-2 rounded bg-pink-500 text-white cursor-pointer" type="submit" value="Create New Category">
 
                 </form>
+
+                <h2 class="text-xl font-bold my-9">Existing Categories</h2>
+
+                <div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
+                        
+                        <% categories.forEach(function(category) { %>
+
+                            <a href="/owners/editcategory/<%= category._id %>"><button class="border p-2 rounded w-full"><%= category.name %></button></a>
+
+                            <% }) %>
+                            
+                        </div>
+
+                </div>
 
             </main>
 
         </div>
 
     </div>
-
-    <script>
-        function updateSubcategories() {
-            const categorySelect = document.getElementById('categorySelect');
-            const subCategorySelect = document.getElementById('subCategorySelect');
-
-            subCategorySelect.innerHTML = '';
-
-            const selectedCategory = categorySelect.value;
-            const subCategories = JSON.parse(categorySelect.options[categorySelect.selectedIndex].dataset.subcategories);
-
-            subCategories.forEach(subCategory => {
-                const option = document.createElement('option');
-                option.value = subCategory;
-                option.textContent = subCategory;
-                subCategorySelect.appendChild(option);
-            });
-        }
-    </script>

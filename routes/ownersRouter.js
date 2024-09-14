@@ -12,6 +12,8 @@ const {
     createProducts,
     getProducts,
     getProduct,
+    createCategory,
+    editCategory
 } = require("../controllers/ownerController");
 
 
@@ -34,5 +36,9 @@ router.get("/createproducts", isAdmin, createProducts);
 router.get('/products', isAdmin, getProducts);
 
 router.get('/products/:id', isAdmin, getProduct);
+
+router.get('/createcategory', isAdmin, createCategory);
+
+router.get('/editcategory/:id', isAdmin, editCategory);
 
 module.exports = router;

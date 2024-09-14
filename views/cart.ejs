@@ -30,7 +30,7 @@
 
                 <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start product" data-id="<%= item.productId %>" data-price="<%= item.productId.price %>" data-discount="<%= item.productId.discount %>" data-stock="<%= item.productId.stock %>">
 
-                    <img src="data:image/jpeg;base64,<%= item.productId.image.toString('base64') %>" alt="product-image" class="w-full rounded-lg sm:w-40" />
+                    <img src="data:image/jpeg;base64,<%= item.productId.image[0].toString('base64') %>" alt="product-image" class="w-full rounded-lg sm:w-40" style="aspect-ratio: 1/1; object-fit: contain" />
     
                     <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
     
@@ -139,7 +139,7 @@
 
 <% } else { %> 
 
-    <div class="h-[50vh] w-screen flex flex-col items-center justify-center">
+    <div class="h-[80vh] w-screen flex flex-col items-center justify-center">
 
         <h1 class="text-2xl font-semibold">Your cart is Empty!</h1>
         <a href="/" class="w-fit px-3 py-2 flex items-center justify-center bg-pink-500 text-white gap-2 mt-1 rounded">Continue Shopping</a>

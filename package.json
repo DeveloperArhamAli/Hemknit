@@ -30,7 +30,10 @@
     "postcss-cli": "^11.0.0"
   },
   "devDependencies": {
+    "@types/connect-flash": "^0.0.40",
+    "@types/cookie-parser": "^1.4.7",
     "@types/debug": "^4.1.12",
+    "@types/express-session": "^1.18.0",
     "@types/nodemailer": "^6.4.15",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.41",
