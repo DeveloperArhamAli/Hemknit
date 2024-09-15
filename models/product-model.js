@@ -13,6 +13,12 @@ const productSchema = mongoose.Schema({
     },
     brand: String,
     stock: Number,
+    size: [{
+        type: String,
+    }],
+    color: [{
+        type: String,
+    }],
     category: String,
     subCategory: [{
         type: String,

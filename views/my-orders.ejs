@@ -9,7 +9,7 @@
 <% } %>
 
 <% if(error.length>0){ %>
-    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-red-500">
+    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-orange-500">
         <span class="inline-block mt-1 mb-1 text-white">
             <%= error %>
         </span>
@@ -79,7 +79,7 @@
         
                         <% if (order.status === 'Pending') { %>
                             <form action="/users/cancel-order/<%= order._id %>" class="w-1/2" method="POST"> 
-                                <button type="submit" class="w-full border bg-red-500 text-white font-semibold px-2 py-2 rounded-lg">Cancel Order</button>
+                                <button type="submit" class="w-full border bg-orange-500 text-white font-semibold px-2 py-2 rounded-lg">Cancel Order</button>
                             </form>
                         <% } %>
                         <form action="/users/order/<%= order._id %>" class="w-1/2">
