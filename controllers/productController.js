@@ -4,11 +4,11 @@ const categoryModel = require("../models/category-model")
 const createProduct = async function (req, res) {
     try {
 
-        let { name, price, discount, description, brand, stock, category, subCategory } = req.body;
+        let { name, price, discount, description, brand, stock, category, subCategory, size, color } = req.body;
         
         const image = req.files.map(file => file.buffer);
 
-        if (!(name && price && description && brand && stock && category && subCategory && image.length > 0)) {
+        if (!(name && price && description && brand && stock && category && subCategory && size && color && image.length > 0)) {
             req.flash("error", "All fields are required except discount");
             return res.redirect("/owners/createproducts");
         }
@@ -23,6 +23,8 @@ const createProduct = async function (req, res) {
             stock,
             category,
             subCategory,
+            size: size.replace(/&/g, '-').split('-'),
+            color: color.replace(/&/g, '-').split('-'),
         });
         
         req.flash("success", "Product created successfully");

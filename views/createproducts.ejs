@@ -167,8 +167,10 @@
                             <input name="discount" type="number" placeholder="Discount Price" class="border p-2 rounded w-full">
                             <input name="brand" type="text" placeholder="Product Brand" class="border p-2 rounded w-full">
                             <input name="stock" type="number" placeholder="Product Stock" class="border p-2 rounded w-full">
+                            <input name="size" type="text" placeholder="Product Sizes" class="border p-2 rounded w-full">
+                            <input name="color" type="text" placeholder="Product Colors" class="border p-2 rounded w-full h-fit">
 
-                            <select id="categorySelect" name="category" onchange="updateSubcategories()" class="border p-2 rounded w-full text-gray-400">
+                            <select id="categorySelect" name="category" onchange="updateSubcategories()" class="border p-2 rounded w-full text-gray-400 h-fit">
                                 <option disabled selected>Select a category</option>
                                 <% categories.forEach(category => { %>
                                     <option value="<%= category.name %>" data-subcategories='<%= JSON.stringify(category.subCategory) %>'>

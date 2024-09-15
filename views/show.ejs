@@ -59,8 +59,31 @@
 
                     <hr class="my-3">
 
+                    <div class="flex flex-col">
+
+                        <div>
+
+                            <% product.size.forEach(function(size){ %>
+
+                                <span class="text-gray-600 px-3 py-2 cursor-pointer border"><%= size %></span>
+        
+                            <% }) %>
+
+                        </div>
+    
+                        <div class="mt-8">
+
+                            <% product.color.forEach(function(color){ %>
+                                <span class="px-2.5 rounded-full mr-3 border cursor-pointer border-black" style="background-color: <%= color %>"></span>
+        
+                            <% }) %>
+
+                        </div>
+
+                    </div>
+
                     <div class="hidden md:flex">
-                    
+
                         <% if(product.stock >= 1) { %>
 
                             <div class="flex items-center mt-6">

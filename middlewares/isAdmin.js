@@ -1,11 +1,3 @@
-// module.exports = (req, res, next) => {
-//     if (req.user && req.user.isAdmin) {
-//         next(); // Proceed to the next middleware or route handler
-//     } else {
-//         res.redirect("/owner-login")
-//     }
-// };
-
 const jwt = require("jsonwebtoken");
 const ownerModel = require("../models/owner-model");
 
@@ -31,6 +23,5 @@ module.exports = async function (req, res, next) {
         req.flash("error", "You need to login first.")
         res.redirect("/");
         console.log(err);
-        
     };
 };
