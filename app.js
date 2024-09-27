@@ -14,9 +14,9 @@ const indexRouter = require("./routes/index");
 
 const db = require("./config/mongoose-connection");
 
-app.use(express.json());;
-app.use(express.urlencoded({ extended: true }));;
-app.use(cookieParser()); ;
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(
     expressSession({
         resave: false,
@@ -35,4 +35,4 @@ app.use("/product", productsRouter);
 
 app.listen(process.env.PORT, () => {
     console.log(`App running on http://localhost:${process.env.PORT}`);
-})
+});
