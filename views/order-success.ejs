@@ -1,7 +1,7 @@
 <%- include ("./partials/header") %>
 
 <% if(success.length>0){ %>
-    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-orange-500">
+    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-blue-500">
         <span class="inline-block mt-1 mb-1 text-white">
             <%= success %>
         </span>
@@ -9,7 +9,7 @@
 <% } %>
 
 <% if(error.length>0){ %>
-    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-orange-500">
+    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-blue-500">
         <span class="inline-block mt-1 mb-1 text-white">
             <%= error %>
         </span>
@@ -20,8 +20,8 @@
         <h1 class="text-2xl font-semibold">Order Success</h1>
         <p class="text-lg text-center">Your order has been placed successfully!</p>
         <div class="flex gap-2">
-            <a href="/" class="w-fit px-3 py-2 flex items-center justify-center bg-orange-500 text-white gap-2 mt-1 rounded text-center">Continue Shopping</a>
-            <a href="/users/my-orders" class="w-fit px-3 py-2 flex items-center justify-center bg-orange-500 text-white gap-2 mt-1 rounded text-center">View All Orders</a>
+            <a href="/" class="w-fit px-3 py-2 flex items-center justify-center bg-blue-500 text-white gap-2 mt-1 rounded text-center">Continue Shopping</a>
+            <a href="/users/my-orders" class="w-fit px-3 py-2 flex items-center justify-center bg-blue-500 text-white gap-2 mt-1 rounded text-center">View All Orders</a>
         </div>
     </div>
 

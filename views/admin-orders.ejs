@@ -1,7 +1,7 @@
 <%- include ('./partials/ownerheader') %>
 
 <% if(success.length>0){ %>
-    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-orange-500">
+    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-blue-500">
         <span class="inline-block mt-1 mb-1 text-white">
             <%= success %>
         </span>
@@ -9,7 +9,7 @@
 <% } %>
 
 <% if(error.length>0){ %>
-    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-orange-500">
+    <div class="fixed bottom-2 z-10 right-2 p-3 rounded-md bg-blue-500">
         <span class="inline-block mt-1 mb-1 text-white">
             <%= error %>
         </span>
@@ -78,7 +78,7 @@
 
         </nav>
 
-        <a class="flex items-center px-6 py-2 mt-4 text-white bg-orange-500 absolute bottom-5 w-full" href="/users/logout">
+        <a class="flex items-center px-6 py-2 mt-4 text-white bg-blue-500 absolute bottom-5 w-full" href="/users/logout">
                 
                 <i class="ri-arrow-right-circle-fill text-2xl"></i>
                 <span class="mx-3">Logout</span>
@@ -89,7 +89,7 @@
 
     <div class="flex flex-col flex-1 overflow-hidden left-0 lg:relative w-screen">
 
-        <header class="flex items-center justify-between px-6 py-4 bg-white border-b-4 border-orange-500">
+        <header class="flex items-center justify-between px-6 py-4 bg-white border-b-4 border-blue-500">
 
             <div class="flex items-center">
 
@@ -101,7 +101,7 @@
 
             </div>
 
-            <a href="/"><h1 class="text-2xl">DesignerArtistry</h1></a>
+            <a href="/"><h1 class="text-2xl">Hemknit</h1></a>
 
             <div class="flex items-center">
 
@@ -121,19 +121,19 @@
                         class="absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white rounded-md shadow-xl"
                         style="display: none;">
 
-                        <a href="/owners/admin" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-500 hover:text-white">Dashboard</a>
+                        <a href="/owners/admin" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Dashboard</a>
 
-                        <a href="/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-500 hover:text-white">Shop</a>
+                        <a href="/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Shop</a>
 
-                        <a href="/owners/products" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-500 hover:text-white">Products</a>
+                        <a href="/owners/products" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Products</a>
 
-                        <a href="/owners/orders" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-500 hover:text-white">Orders</a>
+                        <a href="/owners/orders" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Orders</a>
 
-                        <a href="/owners/createproducts" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-500 hover:text-white">Create Products</a>
+                        <a href="/owners/createproducts" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Create Products</a>
 
-                        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-500 hover:text-white"href="/owners/createCategory">Create Categories</a>
+                        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white"href="/owners/createCategory">Create Categories</a>
 
-                        <a href="/users/logout" class="block px-4 py-2 text-sm text-white bg-orange-500">Logout</a>
+                        <a href="/users/logout" class="block px-4 py-2 text-sm text-white bg-blue-500">Logout</a>
 
                     </div>
 
@@ -217,7 +217,7 @@
                                             <% } else if (order.order.status === 'Delivered') { %>
                                                 bg-green-500
                                             <% } else if (order.order.status === 'Cancelled') { %>
-                                                bg-orange-500
+                                                bg-blue-500
                                             <% } %>">
                                                 <%= order.order.status %>
                                             </span>
@@ -230,7 +230,7 @@
 
                                         <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
 
-                                            <a href="/owners/orders/<%= order.order._id %>" class="text-orange-600 hover:text-orange-900">Details</a>
+                                            <a href="/owners/orders/<%= order.order._id %>" class="text-blue-600 hover:text-blue-900">Details</a>
 
                                         </td>
 

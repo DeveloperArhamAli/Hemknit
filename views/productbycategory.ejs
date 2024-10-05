@@ -33,18 +33,18 @@
     
                             <div class="flex flex-col items-center justify-between w-full">
     
-                                <p class="text-sm font-bold mb-1 text-orange-400">
+                                <p class="text-sm font-bold mb-1 text-blue-400">
                                     Rs.<%= product.price - product.discount %>
                                 </p>
     
                                 <% if(product.stock >= 1) { %>
-                                <a class="flex items-center space-x-1.5 bg-orange-500 px-4 py-1.5 w-full text-white duration-100 hover:bg-orange-600" href="/users/addtocart/<%= product._id %>">
+                                <a class="flex items-center space-x-1.5 bg-blue-500 px-4 py-1.5 w-full text-white duration-100 hover:bg-blue-600" href="/users/addtocart/<%= product._id %>">
                                     <i class="ri-shopping-cart-line"></i>
                                     <button class="text-sm">Add to cart</button>
                                 </a>
     
                                 <% } else { %>
-                                        <a class="flex items-center space-x-1.5 bg-orange-500 px-4 py-1.5 w-full text-white duration-100 hover:bg-orange-600 cursor-not-allowed">
+                                        <a class="flex items-center space-x-1.5 bg-blue-500 px-4 py-1.5 w-full text-white duration-100 hover:bg-blue-600 cursor-not-allowed">
                                         <i class="ri-shopping-cart-line"></i>
                                         <button class="text-sm">Sold Out</button>
                                     </a>
